@@ -55,9 +55,9 @@
             
             <!-- Left: Product Image -->
             <div class="col-lg-5">
-                <div class="img-container shadow-sm position-relative">
+                <div class="img-container shadow-sm position-relative mb-3">
                     @if($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-img-large">
+                        <img id="main-product-image" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-img-large">
                     @else
                         <div class="d-flex align-items-center justify-content-center" style="height: 400px;">
                             <span class="text-muted fs-4">No Image Available</span>
@@ -65,7 +65,46 @@
                     @endif
                     <span class="position-absolute top-0 start-0 badge bg-danger m-3 fs-6 px-3 py-2">-20% OFF</span>
                 </div>
+
+                @if($product->images->count() > 0)
+                    <div class="row g-2 overflow-x-auto pb-2" style="scrollbar-width: thin;">
+                        <!-- Primary Image Thumbnail -->
+                        <div class="col-3">
+                            <div class="gallery-thumbnail active" onclick="changeImage('{{ asset('storage/' . $product->image) }}', this)">
+                                <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer;">
+                            </div>
+                        </div>
+                        <!-- Additional Images Thumbnails -->
+                        @foreach($product->images as $additionalImage)
+                            <div class="col-3">
+                                <div class="gallery-thumbnail" onclick="changeImage('{{ asset('storage/' . $additionalImage->image_path) }}', this)">
+                                    <img src="{{ asset('storage/' . $additionalImage->image_path) }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer; opacity: 0.6; transition: all 0.3s ease;">
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
+
+            <style>
+                .gallery-thumbnail.active img {
+                    opacity: 1 !important;
+                    border: 2px solid #DC143C;
+                }
+                .gallery-thumbnail:hover img {
+                    opacity: 1 !important;
+                }
+            </style>
+
+            <script>
+                function changeImage(src, element) {
+                    document.getElementById('main-product-image').src = src;
+                    
+                    // Update active state
+                    document.querySelectorAll('.gallery-thumbnail').forEach(el => el.classList.remove('active'));
+                    element.classList.add('active');
+                }
+            </script>
 
             <!-- Right: Product Details -->
             <div class="col-lg-7">

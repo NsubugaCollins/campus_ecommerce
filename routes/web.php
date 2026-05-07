@@ -96,6 +96,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
     Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
+    // Product Images Deletion
+    Route::delete('/product-images/{image}', [App\Http\Controllers\Admin\ProductController::class, 'destroyImage'])->name('products.images.destroy');
+
     // Admin Messaging Routes
     Route::get('/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('messages.show');

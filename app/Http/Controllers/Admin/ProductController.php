@@ -39,15 +39,24 @@ class ProductController extends Controller
                 'category' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,bmp,tiff|max:20480',
+                'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,bmp,tiff|max:20480',
             ]);
 
-            // Handle image upload
+            // Handle main image upload
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('products', 'public');
                 $validated['image'] = $imagePath;
             }
 
             $product = Product::create($validated);
+
+            // Handle additional images upload
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $additionalImage) {
+                    $path = $additionalImage->store('products/gallery', 'public');
+                    $product->images()->create(['image_path' => $path]);
+                }
+            }
 
             return redirect()->route('admin.products.index')
                 ->with('success', 'Product "' . $product->name . '" created successfully.');
@@ -97,9 +106,10 @@ class ProductController extends Controller
                 'category' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,bmp,tiff|max:20480',
+                'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,bmp,tiff|max:20480',
             ]);
 
-            // Handle image upload
+            // Handle main image upload
             if ($request->hasFile('image')) {
                 // Delete old image if it exists
                 if ($product->image) {
@@ -110,6 +120,14 @@ class ProductController extends Controller
             }
 
             $product->update($validated);
+
+            // Handle additional images upload
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $additionalImage) {
+                    $path = $additionalImage->store('products/gallery', 'public');
+                    $product->images()->create(['image_path' => $path]);
+                }
+            }
 
             return redirect()->route('admin.products.index')
                 ->with('success', 'Product "' . $product->name . '" updated successfully.');
@@ -141,6 +159,17 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.products.index')
                 ->with('error', 'Failed to delete product: ' . $e->getMessage());
+        }
+    }
+
+    public function destroyImage(\App\Models\ProductImage $image)
+    {
+        try {
+            Storage::disk('public')->delete($image->image_path);
+            $image->delete();
+            return back()->with('success', 'Additional image deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete image.');
         }
     }
 }

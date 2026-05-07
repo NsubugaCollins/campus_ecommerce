@@ -77,17 +77,28 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="image" class="form-label text-secondary">Product Image</label>
-                            <input id="image" type="file" class="form-control form-control-lg @error('image') is-invalid @enderror" name="image" accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,image/tiff" onchange="previewImage(event)">
-                            <small class="text-muted d-block mt-2">Allowed formats: JPEG, PNG, JPG, GIF, WebP, BMP, TIFF (Max 20MB)</small>
+                            <label for="image" class="form-label text-secondary">Primary Product Image (Main View)</label>
+                            <input id="image" type="file" class="form-control form-control-lg @error('image') is-invalid @enderror" name="image" accept="image/*" onchange="previewImage(event)">
                             @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                             <div id="imagePreview" class="mt-3" style="display: none;">
-                                <img id="previewImg" src="" alt="Image preview" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+                                <img id="previewImg" src="" alt="Image preview" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
                             </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="additional_images" class="form-label text-secondary">Additional Product Images (Other Sides)</label>
+                            <input id="additional_images" type="file" class="form-control form-control-lg @error('additional_images.*') is-invalid @enderror" name="additional_images[]" accept="image/*" multiple onchange="previewMultipleImages(event)">
+                            <small class="text-muted d-block mt-2">You can select multiple images at once (e.g., front, back, sides).</small>
+                            @error('additional_images.*')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <div id="additionalImagesPreview" class="mt-3 d-flex flex-wrap gap-2"></div>
                         </div>
 
                         <div class="d-grid gap-2 mt-5">
@@ -103,22 +114,25 @@
 </div>
 
 <script>
-    function previewImage(event) {
+    function previewMultipleImages(event) {
         const input = event.target;
-        const preview = document.getElementById('imagePreview');
-        const previewImg = document.getElementById('previewImg');
+        const previewContainer = document.getElementById('additionalImagesPreview');
+        previewContainer.innerHTML = '';
         
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            
-            reader.onload = function (e) {
-                previewImg.src = e.target.result;
-                preview.style.display = 'block';
-            }
-            
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            preview.style.display = 'none';
+        if (input.files) {
+            Array.from(input.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'img-fluid rounded';
+                    img.style.maxHeight = '100px';
+                    img.style.width = '100px';
+                    img.style.objectFit = 'cover';
+                    previewContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            });
         }
     }
 </script>
