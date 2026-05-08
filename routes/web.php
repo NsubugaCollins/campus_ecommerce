@@ -3,6 +3,25 @@
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/health', function () {
+    try {
+        // Test database connection
+        \DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'ok',
+            'database' => 'connected',
+            'timestamp' => now()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'database' => 'failed',
+            'error' => $e->getMessage(),
+            'timestamp' => now()
+        ], 500);
+    }
+});
+
 Route::get('/', function () {
     // Simulate Flash Sales
     $flashSales = \App\Models\Product::inRandomOrder()->take(6)->get();
