@@ -5,8 +5,6 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Events\UserCreated;
 use App\Events\OrderCreated;
-use App\Listeners\SendRegistrationEmail;
-use App\Listeners\SendOrderConfirmationEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,10 +15,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserCreated::class => [
-            SendRegistrationEmail::class,
+            //
         ],
         OrderCreated::class => [
-            SendOrderConfirmationEmail::class,
+            //
         ],
     ];
 

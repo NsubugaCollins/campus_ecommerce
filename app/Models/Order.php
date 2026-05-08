@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Mail\OrderConfirmationMail;
-use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -46,13 +44,5 @@ class Order extends Model
         return $this->hasOne(Rating::class);
     }
 
-    /**
-     * Send the order confirmation email to the user.
-     *
-     * @return void
-     */
-    public function sendConfirmationEmail()
-    {
-        Mail::to($this->user->email)->queue(new OrderConfirmationMail($this));
-    }
+
 }

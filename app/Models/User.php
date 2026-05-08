@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Mail\UserRegistrationMail;
-use Illuminate\Support\Facades\Mail;
 
 #[Fillable(['name', 'email', 'password', 'role', 'login_count', 'last_login_at', 'points', 'referral_code', 'referred_by'])]
 #[Hidden(['password', 'remember_token'])]
@@ -65,15 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(User::class, 'referred_by');
     }
 
-    /**
-     * Send the registration email to the user.
-     *
-     * @return void
-     */
-    public function sendRegistrationEmail()
-    {
-        Mail::to($this->email)->queue(new UserRegistrationMail($this));
-    }
+
 
     public function sentMessages()
     {

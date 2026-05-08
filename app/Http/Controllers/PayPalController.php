@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Order;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PaymentReceiptMail;
 
 class PayPalController extends Controller
 {
@@ -65,8 +63,7 @@ class PayPalController extends Controller
                 'status' => 'processing'
             ]);
 
-            // Send payment receipt email
-            Mail::to($order->user->email)->queue(new PaymentReceiptMail($order));
+
 
             // Clear the cart
             session()->forget('cart');

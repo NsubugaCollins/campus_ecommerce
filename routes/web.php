@@ -106,27 +106,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 });
 
-Route::get('/test-mail', function () {
-    $email = request('email') ?? 'collinsnsubuga.ug@gmail.com';
-    $preview = request('preview');
 
-    if ($preview == 'registration') {
-        $user = \App\Models\User::first();
-        return new \App\Mail\UserRegistrationMail($user);
-    }
-
-    if ($preview == 'order') {
-        $order = \App\Models\Order::first();
-        if (!$order) return "No orders found to preview.";
-        return new \App\Mail\OrderConfirmationMail($order);
-    }
-
-    try {
-        \Illuminate\Support\Facades\Mail::to($email)->send(new \App\Mail\TestEmail());
-        return "Test email sent to $email successfully! (Check storage/logs/laravel.log)";
-    } catch (\Exception $e) {
-        return "Failed to send email: " . $e->getMessage();
-    }
-});
 
 
