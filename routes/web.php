@@ -3,6 +3,22 @@
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+Route::get('/create-admin', function () {
+    User::updateOrCreate(
+        ['email' => 'admin@admin.com'],
+        [
+            'name' => 'Admin',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+        ]
+    );
+
+    return 'Admin created successfully';
+});
+
 Route::get('/health', function () {
     try {
         // Test database connection
