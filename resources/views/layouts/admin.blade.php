@@ -8,7 +8,7 @@
     <title>{{ $siteSettings['store_name'] ?? 'Cycle' }} - Admin Dashboard</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     
@@ -182,7 +182,7 @@
     </div>
     
     <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
 
     @if(session('welcome_message'))
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
