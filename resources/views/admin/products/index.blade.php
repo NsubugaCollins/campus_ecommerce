@@ -38,7 +38,7 @@
                         <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
                             <td class="px-4 py-3 border-0 align-middle">
                                 @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid rounded" style="max-height: 60px; max-width: 60px; object-fit: cover;">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-fluid rounded" style="max-height: 60px; max-width: 60px; object-fit: cover;">
                                 @else
                                     <span class="text-muted small">No image</span>
                                 @endif

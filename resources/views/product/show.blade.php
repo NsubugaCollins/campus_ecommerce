@@ -57,7 +57,7 @@
             <div class="col-lg-5">
                 <div class="img-container shadow-sm position-relative mb-3">
                     @if($product->image)
-                        <img id="main-product-image" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-img-large">
+                        <img id="main-product-image" src="{{ $product->image_url }}" alt="{{ $product->name }}" class="product-img-large">
                     @else
                         <div class="d-flex align-items-center justify-content-center" style="height: 400px;">
                             <span class="text-muted fs-4">No Image Available</span>
@@ -70,15 +70,15 @@
                     <div class="row g-2 overflow-x-auto pb-2" style="scrollbar-width: thin;">
                         <!-- Primary Image Thumbnail -->
                         <div class="col-3">
-                            <div class="gallery-thumbnail active" onclick="changeImage('{{ asset('storage/' . $product->image) }}', this)">
-                                <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer;">
+                            <div class="gallery-thumbnail active" onclick="changeImage('{{ $product->image_url }}', this)">
+                                <img src="{{ $product->image_url }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer;">
                             </div>
                         </div>
                         <!-- Additional Images Thumbnails -->
                         @foreach($product->images as $additionalImage)
                             <div class="col-3">
-                                <div class="gallery-thumbnail" onclick="changeImage('{{ asset('storage/' . $additionalImage->image_path) }}', this)">
-                                    <img src="{{ asset('storage/' . $additionalImage->image_path) }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer; opacity: 0.6; transition: all 0.3s ease;">
+                                <div class="gallery-thumbnail" onclick="changeImage('{{ $additionalImage->image_url }}', this)">
+                                    <img src="{{ $additionalImage->image_url }}" class="img-fluid rounded" style="height: 80px; width: 100%; object-fit: cover; cursor: pointer; opacity: 0.6; transition: all 0.3s ease;">
                                 </div>
                             </div>
                         @endforeach

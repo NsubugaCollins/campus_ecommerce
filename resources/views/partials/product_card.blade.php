@@ -3,7 +3,7 @@
         <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none">
             <div class="product-img-wrapper position-relative">
                 @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" class="product-img" alt="{{ $product->name }}">
+                    <img src="{{ $product->image_url }}" class="product-img" alt="{{ $product->name }}">
                 @else
                     <div class="text-muted d-flex align-items-center justify-content-center h-100 w-100 bg-dark">
                         <span class="small">No Image</span>

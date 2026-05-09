@@ -75,7 +75,7 @@
                             <label for="image" class="form-label text-secondary">Primary Product Image (Main View)</label>
                             @if($product->image)
                                 <div class="mb-3 position-relative d-inline-block">
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
                                     <div class="position-absolute top-0 end-0 p-1">
                                         <span class="badge bg-primary">Primary</span>
                                     </div>
@@ -101,7 +101,7 @@
                                     @foreach($product->images as $image)
                                         <div class="col-4 col-md-3">
                                             <div class="position-relative group">
-                                                <img src="{{ asset('storage/' . $image->image_path) }}" class="img-fluid rounded border border-secondary" style="height: 100px; width: 100%; object-fit: cover;">
+                                                <img src="{{ $image->image_url }}" class="img-fluid rounded border border-secondary" style="height: 100px; width: 100%; object-fit: cover;">
                                                 <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1 p-1 shadow" 
                                                         onclick="if(confirm('Delete this image?')) { document.getElementById('delete-image-{{ $image->id }}').submit(); }"
                                                         title="Delete Image">

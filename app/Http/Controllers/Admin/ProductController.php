@@ -44,16 +44,34 @@ class ProductController extends Controller
 
             // Handle main image upload
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('products', 'public');
-                $validated['image'] = $imagePath;
+                if (env('CLOUDINARY_URL')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                    $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                        'folder' => 'campus_mall/products'
+                    ]);
+                    $validated['image'] = $result['secure_url'];
+                } else {
+                    $imagePath = $request->file('image')->store('products', 'public');
+                    $validated['image'] = $imagePath;
+                }
             }
 
             $product = Product::create($validated);
 
             // Handle additional images upload
             if ($request->hasFile('additional_images')) {
+                if (env('CLOUDINARY_URL')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                }
                 foreach ($request->file('additional_images') as $additionalImage) {
-                    $path = $additionalImage->store('products/gallery', 'public');
+                    if (env('CLOUDINARY_URL') && isset($cloudinary)) {
+                        $result = $cloudinary->uploadApi()->upload($additionalImage->getRealPath(), [
+                            'folder' => 'campus_mall/products/gallery'
+                        ]);
+                        $path = $result['secure_url'];
+                    } else {
+                        $path = $additionalImage->store('products/gallery', 'public');
+                    }
                     $product->images()->create(['image_path' => $path]);
                 }
             }
@@ -111,20 +129,39 @@ class ProductController extends Controller
 
             // Handle main image upload
             if ($request->hasFile('image')) {
-                // Delete old image if it exists
-                if ($product->image) {
+                // Delete old image if it exists and is local
+                if ($product->image && !\Illuminate\Support\Str::startsWith($product->image, ['http://', 'https://'])) {
                     Storage::disk('public')->delete($product->image);
                 }
-                $imagePath = $request->file('image')->store('products', 'public');
-                $validated['image'] = $imagePath;
+                
+                if (env('CLOUDINARY_URL')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                    $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                        'folder' => 'campus_mall/products'
+                    ]);
+                    $validated['image'] = $result['secure_url'];
+                } else {
+                    $imagePath = $request->file('image')->store('products', 'public');
+                    $validated['image'] = $imagePath;
+                }
             }
 
             $product->update($validated);
 
             // Handle additional images upload
             if ($request->hasFile('additional_images')) {
+                if (env('CLOUDINARY_URL')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                }
                 foreach ($request->file('additional_images') as $additionalImage) {
-                    $path = $additionalImage->store('products/gallery', 'public');
+                    if (env('CLOUDINARY_URL') && isset($cloudinary)) {
+                        $result = $cloudinary->uploadApi()->upload($additionalImage->getRealPath(), [
+                            'folder' => 'campus_mall/products/gallery'
+                        ]);
+                        $path = $result['secure_url'];
+                    } else {
+                        $path = $additionalImage->store('products/gallery', 'public');
+                    }
                     $product->images()->create(['image_path' => $path]);
                 }
             }
@@ -147,8 +184,8 @@ class ProductController extends Controller
             $product = Product::findOrFail($id);
             $productName = $product->name;
             
-            // Delete image if it exists
-            if ($product->image) {
+            // Delete image if it exists and is local
+            if ($product->image && !\Illuminate\Support\Str::startsWith($product->image, ['http://', 'https://'])) {
                 Storage::disk('public')->delete($product->image);
             }
             
@@ -165,7 +202,9 @@ class ProductController extends Controller
     public function destroyImage(\App\Models\ProductImage $image)
     {
         try {
-            Storage::disk('public')->delete($image->image_path);
+            if (!\Illuminate\Support\Str::startsWith($image->image_path, ['http://', 'https://'])) {
+                Storage::disk('public')->delete($image->image_path);
+            }
             $image->delete();
             return back()->with('success', 'Additional image deleted successfully.');
         } catch (\Exception $e) {

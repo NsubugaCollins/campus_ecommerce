@@ -40,7 +40,11 @@
                                         <div class="d-flex align-items-center">
                                             <div class="rounded overflow-hidden bg-black d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.1);">
                                                 @if($item['image'])
+                                                @if(\Illuminate\Support\Str::startsWith($item['image'], ['http://', 'https://']))
+                                                    <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                                @else
                                                     <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                                @endif
                                                 @else
                                                     <div class="text-muted small">No Img</div>
                                                 @endif
