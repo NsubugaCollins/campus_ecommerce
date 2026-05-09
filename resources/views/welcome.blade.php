@@ -23,8 +23,14 @@
     .hero-carousel {
         border-radius: 0.5rem;
         overflow: hidden;
-        height: 100%;
+        height: 450px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 991.98px) {
+        .hero-carousel { height: 350px; }
+    }
+    @media (max-width: 767.98px) {
+        .hero-carousel { height: 250px; }
     }
     .side-banner {
         border-radius: 0.5rem;
@@ -64,7 +70,8 @@
     .product-img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 0.5rem;
         transition: transform 0.5s ease;
     }
     .product-card:hover .product-img {
