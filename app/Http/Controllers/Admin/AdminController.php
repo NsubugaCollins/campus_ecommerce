@@ -28,10 +28,18 @@ class AdminController extends Controller
         // Sales over time (last 7 days)
         $salesData = \App\Models\Order::where('payment_status', 'paid')
             ->where('created_at', '>=', now()->subDays(7))
-            ->selectRaw('DATE(created_at) as date, SUM(total_amount) as total')
-            ->groupBy('date')
-            ->orderBy('date')
-            ->get();
+            ->get()
+            ->groupBy(function($order) {
+                return $order->created_at->format('Y-m-d');
+            })
+            ->map(function ($orders, $date) {
+                return (object)[
+                    'date' => $date,
+                    'total' => $orders->sum('total_amount')
+                ];
+            })
+            ->sortBy('date')
+            ->values();
 
         // Orders by Status
         $orderStatusData = \App\Models\Order::selectRaw('status, COUNT(*) as count')
@@ -54,10 +62,18 @@ class AdminController extends Controller
         // Monthly Earnings (Current Year)
         $monthlyEarnings = \App\Models\Order::where('payment_status', 'paid')
             ->whereYear('created_at', date('Y'))
-            ->selectRaw('MONTH(created_at) as month, SUM(total_amount) as total')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+            ->get()
+            ->groupBy(function($order) {
+                return $order->created_at->format('n');
+            })
+            ->map(function ($orders, $month) {
+                return (object)[
+                    'month' => $month,
+                    'total' => $orders->sum('total_amount')
+                ];
+            })
+            ->sortBy('month')
+            ->values();
 
         // Earnings by Payment Method
         $paymentMethodData = \App\Models\Order::where('payment_status', 'paid')
