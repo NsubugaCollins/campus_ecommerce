@@ -37,22 +37,21 @@
                     </form>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto align-items-center">
+                    <ul class="navbar-nav ms-auto align-items-center flex-row flex-wrap justify-content-center gap-3 gap-md-0 mt-3 mt-md-0 order-2 order-md-3">
                         @if(!Auth::check() || Auth::user()->role === 'user')
-                        <li class="nav-item me-4 mt-2 mt-md-0">
-                            <a class="nav-link position-relative d-flex align-items-center gap-2 text-white" href="{{ route('cart.index') }}">
+                        <li class="nav-item me-md-4">
+                            <a class="nav-link position-relative d-flex align-items-center text-white p-0 p-md-2" href="{{ route('cart.index') }}" title="Cart">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">{{ \App\Models\CartItem::getCount() }}</span>
                                 </div>
-                                <span class="d-md-none fw-bold">Cart</span>
                             </a>
                         </li>
                         @endif
                         
                         <!-- Theme Toggle -->
-                        <li class="nav-item me-3">
-                            <button class="btn btn-link nav-link px-2 d-flex align-items-center" id="themeToggle" type="button" aria-label="Toggle theme">
+                        <li class="nav-item me-md-3">
+                            <button class="btn btn-link nav-link p-0 p-md-2 d-flex align-items-center" id="themeToggle" type="button" aria-label="Toggle theme">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon-light d-none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon-dark"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                             </button>
@@ -61,13 +60,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Sign In') }}</a>
+                                    <a class="nav-link p-0 p-md-2" href="{{ route('login') }}">{{ __('Sign In') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item ms-2">
-                                    <a class="btn btn-primary px-4 py-2" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary px-3 py-1 px-md-4 py-md-2" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
                                 </li>
                             @endif
                         @else
