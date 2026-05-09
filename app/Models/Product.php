@@ -33,7 +33,7 @@ class Product extends Model
             return '';
         }
         if (\Illuminate\Support\Str::startsWith($this->image, ['http://', 'https://'])) {
-            return $this->image;
+            return route('image.proxy', ['url' => $this->image]);
         }
         return asset('storage/' . $this->image);
     }
