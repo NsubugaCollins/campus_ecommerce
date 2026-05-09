@@ -58,6 +58,8 @@ Route::get('/', function () {
 Route::get('/category/{category}', [\App\Http\Controllers\StoreController::class, 'category'])->name('product.category');
 Route::get('/product/{product}', [\App\Http\Controllers\StoreController::class, 'show'])->name('product.show');
 
+Route::get('/image-proxy', [\App\Http\Controllers\ImageProxyController::class, 'show'])->name('image.proxy');
+
 // Authentication Routes
 Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
