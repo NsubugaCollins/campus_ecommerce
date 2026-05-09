@@ -15,6 +15,8 @@ class Product extends Model
         'price',
     ];
 
+    protected $appends = ['image_url'];
+
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
@@ -23,6 +25,17 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (empty($this->image)) {
+            return '';
+        }
+        if (\Illuminate\Support\Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        return asset('storage/' . $this->image);
     }
 }
 
