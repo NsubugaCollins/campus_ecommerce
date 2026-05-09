@@ -44,8 +44,8 @@ class ProductController extends Controller
 
             // Handle main image upload
             if ($request->hasFile('image')) {
-                if (env('CLOUDINARY_URL')) {
-                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                if (config('services.cloudinary.url')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(config('services.cloudinary.url'));
                     $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
                         'folder' => 'campus_mall/products'
                     ]);
@@ -60,11 +60,11 @@ class ProductController extends Controller
 
             // Handle additional images upload
             if ($request->hasFile('additional_images')) {
-                if (env('CLOUDINARY_URL')) {
-                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                if (config('services.cloudinary.url')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(config('services.cloudinary.url'));
                 }
                 foreach ($request->file('additional_images') as $additionalImage) {
-                    if (env('CLOUDINARY_URL') && isset($cloudinary)) {
+                    if (config('services.cloudinary.url') && isset($cloudinary)) {
                         $result = $cloudinary->uploadApi()->upload($additionalImage->getRealPath(), [
                             'folder' => 'campus_mall/products/gallery'
                         ]);
@@ -134,8 +134,8 @@ class ProductController extends Controller
                     Storage::disk('public')->delete($product->image);
                 }
                 
-                if (env('CLOUDINARY_URL')) {
-                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                if (config('services.cloudinary.url')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(config('services.cloudinary.url'));
                     $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
                         'folder' => 'campus_mall/products'
                     ]);
@@ -150,11 +150,11 @@ class ProductController extends Controller
 
             // Handle additional images upload
             if ($request->hasFile('additional_images')) {
-                if (env('CLOUDINARY_URL')) {
-                    $cloudinary = new \Cloudinary\Cloudinary(env('CLOUDINARY_URL'));
+                if (config('services.cloudinary.url')) {
+                    $cloudinary = new \Cloudinary\Cloudinary(config('services.cloudinary.url'));
                 }
                 foreach ($request->file('additional_images') as $additionalImage) {
-                    if (env('CLOUDINARY_URL') && isset($cloudinary)) {
+                    if (config('services.cloudinary.url') && isset($cloudinary)) {
                         $result = $cloudinary->uploadApi()->upload($additionalImage->getRealPath(), [
                             'folder' => 'campus_mall/products/gallery'
                         ]);
