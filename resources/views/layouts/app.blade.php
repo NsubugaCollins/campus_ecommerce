@@ -27,10 +27,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Search Bar (Middle) -->
-                    <form class="d-flex mx-auto w-100 my-2 my-md-0 px-md-4" style="max-width: 600px;">
+                    <form class="d-flex mx-auto w-100 my-3 my-md-0 px-0 px-md-4 order-3 order-md-2" style="max-width: 600px;">
                         <div class="input-group">
-                            <input class="form-control border-secondary bg-dark text-white shadow-none" type="search" placeholder="Search for products, brands and scholastic materials..." aria-label="Search">
-                            <button class="btn btn-primary px-4" type="submit">
+                            <input class="form-control border-secondary bg-dark text-white shadow-none py-2" type="search" placeholder="Search for products, brands..." aria-label="Search">
+                            <button class="btn btn-primary px-3" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             </button>
                         </div>
@@ -130,30 +130,32 @@
                             <li class="mb-2"><i class="me-2">✉️</i> {{ $siteSettings['store_email'] ?? 'support@cycle.com' }}</li>
                         </ul>
                     </div>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-6 col-md-3 mb-4">
                         <h6 class="text-white text-uppercase fw-bold mb-3">Customer Service</h6>
                         <ul class="list-unstyled small">
                             <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Track Your Order</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Return & Refund Policy</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Delivery Information</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Track Order</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Returns</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Delivery</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-6 col-md-3 mb-4">
                         <h6 class="text-white text-uppercase fw-bold mb-3">How to Trade</h6>
                         <ul class="list-unstyled small">
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Selling on Cycle</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Vendor Guidelines</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Payment Methods</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Dispute Resolution</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Selling</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Guidelines</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Payments</a></li>
+                            <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Disputes</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 mb-4">
                         <h6 class="text-white text-uppercase fw-bold mb-3">Newsletter</h6>
-                        <p class="small mb-3">Subscribe to get updates on our latest offers!</p>
-                        <form class="d-flex">
-                            <input type="email" class="form-control form-control-sm bg-dark border-secondary text-white shadow-none" placeholder="Enter email">
-                            <button class="btn btn-primary btn-sm ms-2" type="submit">Subscribe</button>
+                        <p class="small mb-3">Subscribe for latest offers!</p>
+                        <form class="d-flex justify-content-center justify-content-md-start">
+                            <div class="input-group input-group-sm" style="max-width: 250px;">
+                                <input type="email" class="form-control bg-dark border-secondary text-white shadow-none" placeholder="Email">
+                                <button class="btn btn-primary" type="submit">Go</button>
+                            </div>
                         </form>
                     </div>
                 </div>
