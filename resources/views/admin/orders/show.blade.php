@@ -25,6 +25,13 @@
                             <tr class="align-middle border-secondary border-opacity-10">
                                 <td class="ps-4">
                                     <div class="d-flex align-items-center">
+                                        <div class="rounded overflow-hidden bg-black d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                                            @if($item->product && $item->product->image_url)
+                                                <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                            @else
+                                                <div class="text-white-50" style="font-size: 8px;">No Image</div>
+                                            @endif
+                                        </div>
                                         <div class="text-white fw-bold">{{ $item->product->name }}</div>
                                     </div>
                                 </td>
