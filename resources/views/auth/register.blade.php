@@ -38,6 +38,23 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="phone" class="form-label">{{ __('Phone Number') }} <span class="text-muted small fw-normal">(Optional)</span></label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-dark border-secondary text-muted" style="font-size: 0.95rem;">📞</span>
+                                <input id="phone" type="tel" class="form-control form-control-lg @error('phone') is-invalid @enderror"
+                                       name="phone" value="{{ old('phone') }}" autocomplete="tel"
+                                       placeholder="+256 700 000 000">
+                            </div>
+                            @error('phone')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <small class="text-muted">Include country code e.g. +256 for Uganda</small>
+                        </div>
+
+
+                        <div class="mb-3">
                             <label for="password" class="form-label">{{ __('Password') }}</label>
                             <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="••••••••">
 
