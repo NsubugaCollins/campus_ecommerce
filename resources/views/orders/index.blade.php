@@ -40,7 +40,11 @@
                                     <tr>
                                         <td class="px-4 py-3 border-secondary" style="width: 80px;">
                                             <div class="rounded overflow-hidden bg-black d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                                <img src="{{ asset('images/' . ($item->product->image ?? 'placeholder.jpg')) }}" alt="{{ $item->product->name ?? 'Product' }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                                @if($item->product && $item->product->image_url)
+                                                    <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                                @else
+                                                    <div class="text-white-50" style="font-size: 10px;">No Image</div>
+                                                @endif
                                             </div>
                                         </td>
                                         <td class="py-3 border-secondary">
