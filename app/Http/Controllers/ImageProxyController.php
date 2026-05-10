@@ -20,12 +20,12 @@ class ImageProxyController extends Controller
             abort(404);
         }
 
-        // Cache the image for 24 hours to reduce outbound bandwidth and improve latency
-        $cacheKey = 'proxy_image_' . md5($url);
+        // Cache the image for 7 days to reduce outbound bandwidth and improve latency
+        $cacheKey = 'proxy_media_' . md5($url);
 
-        $imageContent = Cache::remember($cacheKey, 86400, function () use ($url) {
+        $imageContent = Cache::remember($cacheKey, 604800, function () use ($url) {
             try {
-                $response = Http::timeout(10)->get($url);
+                $response = Http::timeout(30)->get($url);
                 if ($response->successful()) {
                     return $response->body();
                 }
