@@ -37,7 +37,7 @@ class CartController extends Controller
                 "name" => $item->product->name,
                 "quantity" => $item->quantity,
                 "price" => $item->product->price,
-                "image" => $item->product->image,
+                "image" => $item->product->image_url,
                 "product_id" => $item->product_id,
                 "id" => $item->id // DB ID for easier removal if needed
             ];
