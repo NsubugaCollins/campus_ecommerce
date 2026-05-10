@@ -62,28 +62,24 @@ class MessageController extends Controller
                 $mime      = $file->getMimeType();
                 $mediaName = $file->getClientOriginalName();
 
-                // Determine media type and Cloudinary resource_type
-                // Note: Cloudinary uses 'video' resource_type for audio files too
+                // Determine media type for display
                 if (str_starts_with($mime, 'image/')) {
-                    $mediaType    = 'image';
-                    $resourceType = 'image';
+                    $mediaType = 'image';
                 } elseif (str_starts_with($mime, 'video/')) {
-                    $mediaType    = 'video';
-                    $resourceType = 'video';
+                    $mediaType = 'video';
                 } else {
-                    // audio/* — Cloudinary handles audio under 'video' resource_type
-                    $mediaType    = 'audio';
-                    $resourceType = 'video';
+                    $mediaType = 'audio';
                 }
 
+                // Use 'auto' so Cloudinary detects the resource type itself
                 $cloudinary = new \Cloudinary\Cloudinary(config('services.cloudinary.url'));
                 $result     = $cloudinary->uploadApi()->upload($file->getRealPath(), [
                     'folder'        => 'campus_mall/messages',
-                    'resource_type' => $resourceType,
-                    'public_id'     => 'msg_' . Str::uuid(),
+                    'resource_type' => 'auto',
                 ]);
 
-                $mediaUrl = $result['secure_url'];
+                $mediaUrl = (string) $result['secure_url'];
+                \Log::info('Message media uploaded: ' . $mediaUrl);
             } catch (\Exception $e) {
                 \Log::error('Message media upload failed: ' . $e->getMessage());
                 return back()->withErrors(['file' => 'File upload failed. Please try again.']);
