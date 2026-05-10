@@ -70,7 +70,7 @@
                                 <span class="text-white-50 me-2">Total Amount:</span>
                                 <span class="fs-5 fw-bold text-danger">UGX {{ number_format($order->total_amount, 2) }}</span>
                             </div>
-                            @if($order->status == 'completed')
+                            @if(in_array($order->status, ['completed', 'pending']))
                                 @if(!$order->rating)
                                     <button class="btn btn-sm btn-outline-warning text-uppercase fw-bold px-3 py-2" data-bs-toggle="modal" data-bs-target="#ratingModal{{ $order->id }}">
                                         Rate Shopping
@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                @if($order->status == 'completed' && !$order->rating)
+                @if(in_array($order->status, ['completed', 'pending']) && !$order->rating)
                 <!-- Rating Modal -->
                 <div class="modal fade" id="ratingModal{{ $order->id }}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
