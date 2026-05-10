@@ -50,6 +50,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
             'email' => [
                 'required', 'string', 'email', 'max:255', 'unique:users',
                 function ($attribute, $value, $fail) {
@@ -76,11 +77,12 @@ class RegisterController extends Controller
         }
 
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'        => $data['name'],
+            'email'       => $data['email'],
+            'phone'       => $data['phone'] ?? null,
+            'password'    => Hash::make($data['password']),
             'referred_by' => $referrer ? $referrer->id : null,
-            'points' => $referrer ? 20 : 0, // Bonus for being referred
+            'points'      => $referrer ? 20 : 0,
         ]);
 
         if ($referrer) {
