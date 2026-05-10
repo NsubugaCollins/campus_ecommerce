@@ -31,21 +31,22 @@
 
                                         {{-- Media display --}}
                                         @if($message->media_url)
+                                            @php $proxyUrl = route('image.proxy', ['url' => $message->media_url]); @endphp
                                             @if($message->media_type === 'image')
-                                                <a href="{{ $message->media_url }}" target="_blank">
-                                                    <img src="{{ $message->media_url }}" alt="{{ $message->media_name }}"
+                                                <a href="{{ $proxyUrl }}" target="_blank">
+                                                    <img src="{{ $proxyUrl }}" alt="{{ $message->media_name }}"
                                                          style="max-width: 260px; max-height: 260px; border-radius: 0.6rem; display: block; margin-bottom: {{ $message->message ? '8px' : '0' }};">
                                                 </a>
                                             @elseif($message->media_type === 'video')
                                                 <video controls style="max-width: 260px; border-radius: 0.6rem; display: block; margin-bottom: {{ $message->message ? '8px' : '0' }};">
-                                                    <source src="{{ $message->media_url }}">
+                                                    <source src="{{ $proxyUrl }}">
                                                     Your browser does not support video.
                                                 </video>
                                             @elseif($message->media_type === 'audio')
                                                 <div class="d-flex align-items-center gap-2 mb-{{ $message->message ? '2' : '0' }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="opacity-75"><path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.895 2.5 2zm9-2c0 1.105-1.12 2-2.5 2S10 12.105 10 11s1.12-2 2.5-2 2.5.895 2.5 2zM6 13V3l9-2v10"/></svg>
                                                     <audio controls style="max-width: 220px; height: 36px;">
-                                                        <source src="{{ $message->media_url }}">
+                                                        <source src="{{ $proxyUrl }}">
                                                     </audio>
                                                 </div>
                                             @endif
