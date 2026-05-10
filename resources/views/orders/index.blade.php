@@ -142,6 +142,13 @@
                     </div>
                 </div>
             @endforelse
+
+            <div class="text-center mt-5 mb-4">
+                <a href="{{ route('home') }}" class="btn btn-outline-light px-5 py-3 text-uppercase fw-bold shadow-sm rounded-pill transition-all hover-lift">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Back to Dashboard
+                </a>
+            </div>
         </div>
     </div>
 </div>
