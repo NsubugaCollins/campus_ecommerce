@@ -38,6 +38,8 @@ Route::get('/health', function () {
     }
 });
 
+Route::redirect('/orders', '/user/orders');
+
 Route::get('/', function () {
     // Simulate Flash Sales
     $flashSales = \App\Models\Product::inRandomOrder()->take(6)->get();
