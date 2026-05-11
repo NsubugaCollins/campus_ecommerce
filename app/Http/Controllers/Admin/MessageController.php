@@ -49,7 +49,7 @@ class MessageController extends Controller
         $request->validate([
             'message'     => 'nullable|string|max:5000',
             'reply_to_id' => 'nullable|exists:messages,id',
-            'file'        => 'nullable|file|max:102400',
+            'file'        => 'nullable|file|max:10240',
         ]);
 
         if (empty($request->message) && !$request->hasFile('file')) {
