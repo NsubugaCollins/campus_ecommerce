@@ -42,7 +42,7 @@
                     @if($points > 0)
                     <div class="mt-4 p-3 bg-black border border-secondary rounded">
                         <h6 class="text-white mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-warning me-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Use Your Rewards</h6>
-                        <p class="text-white-50 small mb-2">You have <strong>{{ $points }}</strong> points available. (100 pts = UGX 1.00)</p>
+                        <p class="text-white-50 small mb-2">You have <strong>{{ $points }}</strong> points available. (100 pts = UGX 1,000)</p>
                         <div class="input-group input-group-sm mb-2">
                             <input type="number" id="points_to_use_input" name="points_to_use" class="form-control bg-dark border-secondary text-white" placeholder="Enter points to use" min="0" max="{{ $points }}">
                             <button class="btn btn-outline-primary" type="button" id="apply-points">Apply</button>
@@ -71,7 +71,7 @@
                         if (points > maxPoints) points = maxPoints;
                         if (points < 0) points = 0;
                         
-                        const discount = points / 100;
+                        const discount = points * 10;
                         const newTotal = Math.max(0, baseTotal - discount);
                         
                         displayTotal.innerText = 'UGX ' + newTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});

@@ -87,10 +87,10 @@ class OrderController extends Controller
                 $pointsToUse = $user->points;
             }
             
-            $discount = $pointsToUse / 100; // 100 points = UGX 1.00
+            $discount = $pointsToUse * 10; // 100 points = UGX 1,000
             if ($discount > $totalAmount) {
                 $discount = $totalAmount;
-                $pointsToUse = $discount * 100;
+                $pointsToUse = $discount / 10;
             }
             
             $user->decrement('points', $pointsToUse);
@@ -107,7 +107,7 @@ class OrderController extends Controller
         ]);
 
         if ($user) {
-            $pointsEarned = floor($totalAmount * 10); // Award points for this purchase (10 points per 1 UGX = 10% value back)
+            $pointsEarned = floor($totalAmount / 100); // Award points for this purchase (1 point per 100 UGX = 10% value back)
             $user->increment('points', $pointsEarned);
             session()->flash('points_earned', "You earned $pointsEarned points for this order!");
         }

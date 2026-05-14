@@ -252,7 +252,7 @@
                             <div class="display-4 fw-bold">{{ $user->points }}</div>
                             <div class="small opacity-75 text-uppercase mt-1" style="letter-spacing:2px;">Reward Points</div>
                             <hr style="border-color:rgba(255,255,255,.3);">
-                            <p class="small mb-1 opacity-90">Worth <strong>UGX {{ number_format($user->points / 100, 2) }}</strong> in discounts</p>
+                            <p class="small mb-1 opacity-90">Worth <strong>UGX {{ number_format($user->points * 10, 2) }}</strong> in discounts</p>
                         </div>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                             </div>
                             <hr class="border-secondary opacity-25">
                             <p class="text-white-50 small mb-0 text-center">
-                                <strong class="text-white">100 pts</strong> = UGX 1.00 discount at checkout
+                                <strong class="text-white">100 pts</strong> = UGX 1,000 discount at checkout
                             </p>
                         </div>
                     </div>

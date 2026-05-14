@@ -233,7 +233,7 @@
 
                 <div class="p-3 bg-black border border-secondary rounded">
                     <h6 class="text-white fw-bold mb-2">Redemption:</h6>
-                    <p class="text-white-50 small mb-0"><strong>100 points = UGX 1.00 Discount</strong></p>
+                    <p class="text-white-50 small mb-0"><strong>100 points = UGX 1,000 Discount</strong></p>
                     <p class="text-white-50 small">Redeem your points at the checkout page to save money on your orders!</p>
                 </div>
             </div>
