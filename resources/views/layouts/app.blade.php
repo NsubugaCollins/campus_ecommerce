@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-md navbar-dark sticky-top shadow-sm py-3">
             <div class="container">
                 <a class="navbar-brand text-uppercase" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" height="40" style="object-fit: contain;">
+                    <img src="{{ asset('images/MAIN LOGO 1.png') }}" alt="Logo" height="50" style="object-fit: contain;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

@@ -73,7 +73,7 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 admin-sidebar">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-4 text-white h-100 pb-3">
                     <a href="{{ url('/') }}" class="d-flex align-items-center pb-3 mb-4 text-white text-decoration-none border-bottom border-secondary w-100 justify-content-center justify-content-sm-start">
-                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" height="30" style="object-fit: contain;" class="d-none d-sm-inline">
+                        <img src="{{ asset('images/MAIN LOGO 1.png') }}" alt="Logo" height="40" style="object-fit: contain;" class="d-none d-sm-inline">
                     </a>
                     
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
@@ -158,7 +158,7 @@
                 <div class="admin-topbar d-flex justify-content-between align-items-center py-3 px-4 sticky-top">
                     <h5 class="mb-0 text-white d-none d-md-block">@yield('title', 'Admin Panel')</h5>
                     <div class="d-md-none">
-                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" height="30" style="object-fit: contain;">
+                        <img src="{{ asset('images/MAIN LOGO 1.png') }}" alt="Logo" height="40" style="object-fit: contain;">
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="me-3">
