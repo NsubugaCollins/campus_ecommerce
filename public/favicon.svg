@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+    <defs>
+        <linearGradient id="cartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF8C00;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#DC143C;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <circle cx="9" cy="20" r="2" fill="url(#cartGrad)"></circle>
+    <circle cx="20" cy="20" r="2" fill="url(#cartGrad)"></circle>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="url(#cartGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>

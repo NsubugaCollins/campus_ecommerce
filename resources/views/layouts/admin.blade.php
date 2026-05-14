@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $siteSettings['store_name'] ?? 'Cycle' }} - Admin Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
