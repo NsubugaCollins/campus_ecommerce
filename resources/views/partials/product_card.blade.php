@@ -25,7 +25,12 @@
             </div>
         </div>
         <div class="card-footer bg-transparent border-0 p-3 pt-0 mt-auto">
-            @if(!Auth::check() || Auth::user()->role === 'user')
+            @if(!Auth::check())
+                <a href="{{ route('login') }}" class="btn add-to-cart-btn w-100 text-uppercase fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2 text-decoration-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    Add to Cart
+                </a>
+            @elseif(Auth::user()->role === 'user')
                 <form action="{{ route('cart.add') }}" method="POST" class="w-100">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">

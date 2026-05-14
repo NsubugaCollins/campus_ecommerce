@@ -72,8 +72,8 @@ Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'r
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Cart Routes (User/Guest, No Admin)
-Route::middleware(['user'])->group(function () {
+// Cart Routes (User Only, No Admin)
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
