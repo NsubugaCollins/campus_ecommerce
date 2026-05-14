@@ -27,6 +27,15 @@ class MessageController extends Controller
         return view('admin.messages.index', compact('users'));
     }
 
+    public function allMessages()
+    {
+        $messages = Message::with(['sender', 'receiver'])
+            ->latest()
+            ->paginate(30);
+
+        return view('admin.messages.all', compact('messages'));
+    }
+
     public function show(User $user)
     {
         $messages = Message::where(function ($query) use ($user) {
