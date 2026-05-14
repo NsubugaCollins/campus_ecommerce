@@ -112,6 +112,11 @@
                                 <span class="ms-1 d-none d-sm-inline">Messages</span>
                             </a>
                         </li>
+                        <li class="nav-item w-100">
+                            <a href="{{ route('admin.user-sales.index') }}" class="nav-link align-middle px-3 {{ request()->routeIs('admin.user-sales.*') ? 'active' : '' }}">
+                                <span class="ms-1 d-none d-sm-inline">Trade-Ins</span>
+                            </a>
+                        </li>
                         <li class="nav-item w-100 mt-4">
                             <a href="{{ route('admin.settings') }}" class="nav-link align-middle px-3 {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                                 <span class="ms-1 d-none d-sm-inline">Settings</span>

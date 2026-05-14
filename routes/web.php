@@ -101,6 +101,14 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     // Rating Route
     Route::post('/rating', [App\Http\Controllers\RatingController::class, 'store'])->name('rating.store');
+
+    // Trade-In (User Sale) Routes
+    Route::get('/sell', [App\Http\Controllers\UserSaleController::class, 'create'])->name('user-sales.create');
+    Route::post('/sell', [App\Http\Controllers\UserSaleController::class, 'store'])->name('user-sales.store');
+    Route::get('/my-sales', [App\Http\Controllers\UserSaleController::class, 'index'])->name('user-sales.index');
+    Route::get('/my-sales/{userSale}', [App\Http\Controllers\UserSaleController::class, 'show'])->name('user-sales.show');
+    Route::post('/my-sales/{userSale}/accept', [App\Http\Controllers\UserSaleController::class, 'acceptOffer'])->name('user-sales.accept');
+    Route::post('/my-sales/{userSale}/reject', [App\Http\Controllers\UserSaleController::class, 'rejectOffer'])->name('user-sales.reject');
 });
 
 // Generic Auth Routes for both Admin and User
@@ -142,6 +150,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'store'])->name('messages.store');
+
+    // Admin Trade-In (User Sale) Routes
+    Route::get('/user-sales', [App\Http\Controllers\Admin\UserSaleController::class, 'index'])->name('user-sales.index');
+    Route::get('/user-sales/{userSale}', [App\Http\Controllers\Admin\UserSaleController::class, 'show'])->name('user-sales.show');
+    // We use PATCH for partial updates like offer or status
+    Route::patch('/user-sales/{userSale}/offer', [App\Http\Controllers\Admin\UserSaleController::class, 'makeOffer'])->name('user-sales.make-offer');
+    Route::patch('/user-sales/{userSale}/status', [App\Http\Controllers\Admin\UserSaleController::class, 'updateStatus'])->name('user-sales.update-status');
 
 });
 
