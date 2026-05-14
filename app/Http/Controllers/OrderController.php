@@ -84,7 +84,7 @@ class OrderController extends Controller
 
         if ($pointsToUse > 0 && $user) {
             if ($pointsToUse > $user->points) {
-                $pointsToUse = $user->points;
+                return back()->with('error', "You don't have enough points!")->withInput();
             }
             
             $discount = $pointsToUse * 10; // 100 points = UGX 1,000
