@@ -13,10 +13,10 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $userIds = Message::where('receiver_id', Auth::id())
-                          ->orWhere('sender_id', Auth::id())
-                          ->pluck('sender_id', 'receiver_id')
-                          ->flatten()
+        $senders = Message::where('receiver_id', Auth::id())->pluck('sender_id');
+        $receivers = Message::where('sender_id', Auth::id())->pluck('receiver_id');
+        
+        $userIds = $senders->merge($receivers)
                           ->unique()
                           ->filter(fn($id) => $id != Auth::id());
 
