@@ -148,8 +148,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/product-images/{image}', [App\Http\Controllers\Admin\ProductController::class, 'destroyImage'])->name('products.images.destroy');
 
     // Admin Messaging Routes
-    Route::get('/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('messages.index');
-    Route::get('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('admin.messages.index');
+    Route::get('/messages/all', [App\Http\Controllers\Admin\MessageController::class, 'allMessages'])->name('admin.messages.all');
+    Route::get('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('admin.messages.show');
     Route::post('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'store'])->name('messages.store');
 
     // Admin Trade-In (User Sale) Routes

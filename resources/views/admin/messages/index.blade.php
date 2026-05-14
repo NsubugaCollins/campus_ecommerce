@@ -4,9 +4,15 @@
 
 @section('content')
 <div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
-    <div class="card-header bg-transparent border-0 pt-4 pb-2 px-4">
-        <h5 class="mb-0 text-white fw-bold text-uppercase">Recent Conversations</h5>
-        <p class="text-muted small">Manage and respond to user inquiries.</p>
+    <div class="card-header bg-transparent border-0 pt-4 pb-2 px-4 d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="mb-0 text-white fw-bold text-uppercase">Recent Conversations</h5>
+            <p class="text-muted small">Manage and respond to user inquiries.</p>
+        </div>
+        <div class="btn-group shadow-sm">
+            <a href="{{ route('admin.messages.index') }}" class="btn btn-primary px-3 active">Conversations</a>
+            <a href="{{ route('admin.messages.all') }}" class="btn btn-outline-secondary px-3">All Messages</a>
+        </div>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">

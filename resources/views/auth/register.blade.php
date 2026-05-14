@@ -56,10 +56,15 @@
 
                         <div class="mb-3">
                             <label for="password" class="form-label">{{ __('Password') }}</label>
-                            <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="••••••••">
+                            <div class="input-group">
+                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="••••••••" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleRegPassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eyeRegIcon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
 
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -67,8 +72,31 @@
 
                         <div class="mb-4">
                             <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••">
+                            <div class="input-group">
+                                <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password" placeholder="••••••••" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eyeConfirmIcon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
                         </div>
+
+                        <script>
+                            function setupToggle(btnId, inputId, iconId) {
+                                document.getElementById(btnId).addEventListener('click', function() {
+                                    const password = document.getElementById(inputId);
+                                    const icon = document.getElementById(iconId);
+                                    if (password.type === 'password') {
+                                        password.type = 'text';
+                                        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+                                    } else {
+                                        password.type = 'password';
+                                        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+                                    }
+                                });
+                            }
+                            setupToggle('toggleRegPassword', 'password', 'eyeRegIcon');
+                            setupToggle('toggleConfirmPassword', 'password-confirm', 'eyeConfirmIcon');
+                        </script>
 
                         <div class="mb-4">
                             <label for="referral_code" class="form-label">{{ __('Referral Code (Optional)') }}</label>
