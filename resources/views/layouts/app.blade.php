@@ -41,6 +41,12 @@
                     <ul class="navbar-nav ms-auto align-items-center flex-row flex-wrap justify-content-center gap-3 gap-md-0 mt-3 mt-md-0 order-2 order-md-3">
                         @if(!Auth::check() || Auth::user()->role === 'user')
                         <li class="nav-item me-md-4">
+                            <a class="nav-link d-flex align-items-center text-white p-0 p-md-2 fw-bold" href="{{ route('user-sales.create') }}" title="Sell to Us">
+                                <span class="d-none d-lg-inline me-2 small text-uppercase" style="letter-spacing: 1px;">Sell</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </a>
+                        </li>
+                        <li class="nav-item me-md-4">
                             <a class="nav-link position-relative d-flex align-items-center text-white p-0 p-md-2" href="{{ route('cart.index') }}" title="Cart">
                                 <div class="position-relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
@@ -92,6 +98,8 @@
                                         <a class="dropdown-item py-2" href="{{ route('admin.profile') }}">Admin Profile</a>
                                     @else
                                         <a class="dropdown-item py-2" href="{{ route('home') }}">Dashboard</a>
+                                        <a class="dropdown-item py-2 fw-bold text-primary" href="{{ route('user-sales.create') }}">Sell to Us</a>
+                                        <a class="dropdown-item py-2" href="{{ route('user-sales.index') }}">My Trade-Ins</a>
                                         <a class="dropdown-item py-2" href="{{ route('user.profile') }}">My Profile</a>
                                         <a class="dropdown-item py-2" href="{{ route('orders.index') }}">My Orders</a>
                                         <a class="dropdown-item py-2" href="{{ route('messages.index') }}">Messages</a>
