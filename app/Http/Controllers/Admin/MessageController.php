@@ -13,6 +13,15 @@ class MessageController extends Controller
 {
     public function index()
     {
+        $messages = Message::with(['sender', 'receiver'])
+            ->latest()
+            ->paginate(30);
+
+        return view('admin.messages.all', compact('messages'));
+    }
+
+    public function threads()
+    {
         $senders = Message::where('receiver_id', Auth::id())->pluck('sender_id');
         $receivers = Message::where('sender_id', Auth::id())->pluck('receiver_id');
         
@@ -27,14 +36,6 @@ class MessageController extends Controller
         return view('admin.messages.index', compact('users'));
     }
 
-    public function allMessages()
-    {
-        $messages = Message::with(['sender', 'receiver'])
-            ->latest()
-            ->paginate(30);
-
-        return view('admin.messages.all', compact('messages'));
-    }
 
     public function show(User $user)
     {

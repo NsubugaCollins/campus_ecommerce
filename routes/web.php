@@ -149,7 +149,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Admin Messaging Routes
     Route::get('/messages', [App\Http\Controllers\Admin\MessageController::class, 'index'])->name('messages.index');
-    Route::get('/messages/all', [App\Http\Controllers\Admin\MessageController::class, 'allMessages'])->name('messages.all');
+    Route::get('/messages/threads', [App\Http\Controllers\Admin\MessageController::class, 'threads'])->name('messages.threads');
     Route::get('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages/{user}', [App\Http\Controllers\Admin\MessageController::class, 'store'])->name('messages.store');
 
