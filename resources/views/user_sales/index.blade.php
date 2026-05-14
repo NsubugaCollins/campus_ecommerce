@@ -18,6 +18,12 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger border-0 shadow-sm mb-4 py-3">
+            <i class="me-2">❌</i> {{ session('error') }}
+        </div>
+    @endif
+
     <div class="row g-4">
         @forelse($sales as $sale)
             <div class="col-md-6 col-lg-4">
@@ -67,7 +73,18 @@
                         </div>
 
                         <div class="d-grid gap-2">
-                            <a href="{{ route('user-sales.show', $sale) }}" class="btn btn-outline-light btn-sm py-2">View Details</a>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('user-sales.show', $sale) }}" class="btn btn-outline-light btn-sm py-2 flex-grow-1">View Details</a>
+                                @if(!in_array($sale->status, ['accepted', 'completed']))
+                                <form action="{{ route('user-sales.destroy', $sale) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this trade-in request?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm py-2 px-3" title="Delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    </button>
+                                </form>
+                                @endif
+                            </div>
                             
                             @if($sale->status == 'offer_made')
                                 <div class="d-flex gap-2">

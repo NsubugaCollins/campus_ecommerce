@@ -113,4 +113,20 @@ class UserSaleController extends Controller
 
         return back()->with('success', 'You have rejected the offer.');
     }
+
+    public function destroy(UserSale $userSale)
+    {
+        if ($userSale->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Prevent deletion if already completed or accepted (optional, but safer)
+        if (in_array($userSale->status, ['accepted', 'completed'])) {
+            return back()->with('error', 'Cannot delete a trade-in that has already been accepted or completed.');
+        }
+
+        $userSale->delete();
+
+        return redirect()->route('user-sales.index')->with('success', 'Trade-in request deleted successfully.');
+    }
 }
