@@ -35,13 +35,13 @@
                             <div style="font-size: 0.65rem;">{{ $msg->created_at->diffForHumans() }}</div>
                         </td>
                         <td class="px-4 py-3 border-0 align-middle">
-                            <span class="text-white fw-bold">{{ $msg->sender->name }}</span>
-                            @if($msg->sender->role === 'admin')
+                            <span class="text-white fw-bold">{{ $msg->sender->name ?? 'Unknown' }}</span>
+                            @if($msg->sender && $msg->sender->role === 'admin')
                                 <span class="badge bg-danger ms-1" style="font-size: 0.5rem;">ADMIN</span>
                             @endif
                         </td>
                         <td class="px-4 py-3 border-0 align-middle text-muted small">
-                            {{ $msg->receiver->name }}
+                            {{ $msg->receiver->name ?? 'Unknown' }}
                         </td>
                         <td class="px-4 py-3 border-0 align-middle">
                             <div class="text-white-50 small" style="max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
