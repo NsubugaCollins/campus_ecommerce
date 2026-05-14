@@ -109,6 +109,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/my-sales/{userSale}', [App\Http\Controllers\UserSaleController::class, 'show'])->name('user-sales.show');
     Route::post('/my-sales/{userSale}/accept', [App\Http\Controllers\UserSaleController::class, 'acceptOffer'])->name('user-sales.accept');
     Route::post('/my-sales/{userSale}/reject', [App\Http\Controllers\UserSaleController::class, 'rejectOffer'])->name('user-sales.reject');
+    Route::delete('/my-sales/{userSale}', [App\Http\Controllers\UserSaleController::class, 'destroy'])->name('user-sales.destroy');
 });
 
 // Generic Auth Routes for both Admin and User

@@ -43,7 +43,7 @@
                         <li class="nav-item me-md-4">
                             <a class="nav-link d-flex align-items-center text-white p-0 p-md-2 fw-bold" href="{{ route('user-sales.create') }}" title="Sell to Us">
                                 <span class="d-none d-lg-inline me-2 small text-uppercase" style="letter-spacing: 1px;">Sell</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
                             </a>
                         </li>
                         <li class="nav-item me-md-4">
