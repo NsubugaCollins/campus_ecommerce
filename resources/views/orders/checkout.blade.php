@@ -65,10 +65,23 @@
                         const pointsMessage = document.getElementById('points-message');
                         const formPointsInput = document.getElementById('form_points_to_use');
                         
+                        pointsMessage.classList.add('d-none');
+                        pointsMessage.classList.remove('text-danger', 'text-success');
+                        
                         let points = parseInt(input.value) || 0;
                         const maxPoints = {{ $points }};
                         
-                        if (points > maxPoints) points = maxPoints;
+                        if (points > maxPoints) {
+                            pointsMessage.innerText = "You don't have enough points!";
+                            pointsMessage.classList.remove('d-none');
+                            pointsMessage.classList.add('text-danger');
+                            
+                            // Reset everything if error
+                            displayTotal.innerText = 'UGX ' + baseTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                            if (formPointsInput) formPointsInput.value = 0;
+                            return;
+                        }
+                        
                         if (points < 0) points = 0;
                         
                         const discount = points * 10;
@@ -78,9 +91,8 @@
                         
                         if (points > 0) {
                             pointsMessage.innerText = `-UGX ${discount.toFixed(2)} discount applied!`;
+                            pointsMessage.classList.add('text-success');
                             pointsMessage.classList.remove('d-none');
-                        } else {
-                            pointsMessage.classList.add('d-none');
                         }
                         
                         if (formPointsInput) {
