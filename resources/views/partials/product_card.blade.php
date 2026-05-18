@@ -9,9 +9,7 @@
                         <span class="small">No Image</span>
                     </div>
                 @endif
-                @if(isset($isFlashSale) && $isFlashSale)
-                    <span class="position-absolute top-0 end-0 badge bg-danger m-2">-{{ rand(10, 50) }}%</span>
-                @endif
+
             </div>
         </a>
         <div class="card-body p-3 d-flex flex-column flex-grow-1">
@@ -21,7 +19,7 @@
             </a>
             <div class="mt-auto">
                 <h5 class="text-white fw-bold mb-0">UGX {{ number_format($product->price, 2) }}</h5>
-                <small class="text-muted text-decoration-line-through">UGX {{ number_format($product->price * 1.2, 2) }}</small>
+
             </div>
         </div>
         <div class="card-footer bg-transparent border-0 p-3 pt-0 mt-auto">
