@@ -6,7 +6,7 @@
     {{-- Page Header --}}
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card bg-dark border-secondary shadow-sm overflow-hidden" style="position:relative;">
+            <div class="card admin-card-custom shadow-sm overflow-hidden" style="position:relative;">
                 <div style="position:absolute;top:0;right:0;width:200px;height:100%;background:linear-gradient(90deg,transparent,rgba(220,20,60,0.12));"></div>
                 <div class="card-body p-4 d-flex align-items-center">
                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-4 profile-avatar"
@@ -75,8 +75,8 @@
 
             <div class="row g-4">
                 <div class="col-lg-8">
-                    <div class="card bg-dark border-secondary shadow-sm">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h5 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">Personal Information</h5>
                         </div>
                         <div class="card-body p-4">
@@ -86,14 +86,14 @@
                                     <div class="col-md-6">
                                         <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Full Name</label>
                                         <input type="text" name="name"
-                                               class="form-control bg-black border-secondary text-white @error('name') is-invalid @enderror"
+                                               class="form-control bg-transparent border-0 text-white @error('name') is-invalid @enderror"
                                                value="{{ old('name', $user->name) }}" required>
                                         @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Email Address</label>
                                         <input type="email" name="email"
-                                               class="form-control bg-black border-secondary text-white @error('email') is-invalid @enderror"
+                                               class="form-control bg-transparent border-0 text-white @error('email') is-invalid @enderror"
                                                value="{{ old('email', $user->email) }}" required>
                                         @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
@@ -110,8 +110,8 @@
 
                 <div class="col-lg-4">
                     {{-- Account Info Card --}}
-                    <div class="card bg-dark border-secondary shadow-sm mb-4">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm mb-4">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">Account Info</h6>
                         </div>
                         <div class="card-body p-0">
@@ -141,7 +141,7 @@
                     </div>
 
                     {{-- Quick Nav --}}
-                    <div class="card bg-dark border-secondary shadow-sm">
+                    <div class="card admin-card-custom shadow-sm">
                         <div class="card-body p-0">
 
                             <a href="{{ route('orders.index') }}" class="list-group-item list-group-item-action bg-transparent text-white border-secondary py-3 px-4 d-flex align-items-center">
@@ -166,8 +166,8 @@
 
             <div class="row g-4">
                 <div class="col-lg-8">
-                    <div class="card bg-dark border-secondary shadow-sm">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h5 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">Change Password</h5>
                         </div>
                         <div class="card-body p-4">
@@ -178,7 +178,7 @@
                                         <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Current Password</label>
                                         <div class="input-group">
                                             <input type="password" name="current_password" id="currentPwd"
-                                                   class="form-control bg-black border-secondary text-white @error('current_password') is-invalid @enderror"
+                                                   class="form-control bg-transparent border-0 text-white @error('current_password') is-invalid @enderror"
                                                    placeholder="Enter current password">
                                             <button class="btn btn-outline-secondary toggle-pwd" type="button" data-target="currentPwd">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -190,7 +190,7 @@
                                         <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">New Password</label>
                                         <div class="input-group">
                                             <input type="password" name="password" id="newPwd"
-                                                   class="form-control bg-black border-secondary text-white @error('password') is-invalid @enderror"
+                                                   class="form-control bg-transparent border-0 text-white @error('password') is-invalid @enderror"
                                                    placeholder="Min. 8 characters">
                                             <button class="btn btn-outline-secondary toggle-pwd" type="button" data-target="newPwd">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -202,7 +202,7 @@
                                         <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Confirm New Password</label>
                                         <div class="input-group">
                                             <input type="password" name="password_confirmation" id="confirmPwd"
-                                                   class="form-control bg-black border-secondary text-white"
+                                                   class="form-control bg-transparent border-0 text-white"
                                                    placeholder="Repeat new password">
                                             <button class="btn btn-outline-secondary toggle-pwd" type="button" data-target="confirmPwd">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -221,8 +221,8 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="card bg-dark border-secondary shadow-sm">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">Password Tips</h6>
                         </div>
                         <div class="card-body p-4">
@@ -259,8 +259,8 @@
 
                 {{-- Referral Stats --}}
                 <div class="col-md-4">
-                    <div class="card bg-dark border-secondary shadow-sm h-100">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm h-100">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">Referral Stats</h6>
                         </div>
                         <div class="card-body p-4">
@@ -288,8 +288,8 @@
 
                 {{-- How to Earn --}}
                 <div class="col-md-4">
-                    <div class="card bg-dark border-secondary shadow-sm h-100">
-                        <div class="card-header bg-black border-secondary py-3">
+                    <div class="card admin-card-custom shadow-sm h-100">
+                        <div class="card-header bg-transparent border-0 py-3">
                             <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">How to Earn</h6>
                         </div>
                         <div class="card-body p-4">
@@ -312,8 +312,8 @@
             </div>
 
             {{-- Shareable Referral Link --}}
-            <div class="card bg-dark border-secondary shadow-sm mb-4">
-                <div class="card-header bg-black border-secondary py-3 d-flex align-items-center justify-content-between">
+            <div class="card admin-card-custom shadow-sm mb-4">
+                <div class="card-header bg-transparent border-0 py-3 d-flex align-items-center justify-content-between">
                     <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="#B87333" stroke-width="2" viewBox="0 0 24 24" class="me-2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                         Share Your Referral Link
@@ -329,11 +329,11 @@
                         <div class="col-12">
                             <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Shareable Link</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-black border-secondary text-white-50">
+                                <span class="input-group-text bg-transparent border-0 text-white-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                                 </span>
                                 <input type="text" id="shareableLink"
-                                       class="form-control bg-black border-secondary text-white"
+                                       class="form-control bg-transparent border-0 text-white"
                                        value="{{ url('/register?ref=' . $user->referral_code) }}"
                                        readonly>
                                 <button class="btn btn-primary px-4 fw-bold" type="button" id="copyLinkBtn" onclick="copyLink()">
@@ -347,7 +347,7 @@
                             <label class="form-label text-white-50 small text-uppercase" style="letter-spacing:1px;">Code Only</label>
                             <div class="input-group">
                                 <input type="text" id="refCode"
-                                       class="form-control bg-black border-secondary text-white text-center fw-bold"
+                                       class="form-control bg-transparent border-0 text-white text-center fw-bold"
                                        value="{{ $user->referral_code }}" readonly style="letter-spacing:3px;">
                                 <button class="btn btn-outline-secondary" type="button" id="copyCodeBtn" onclick="copyCode()">Copy</button>
                             </div>
@@ -377,8 +377,8 @@
             </div>
 
             {{-- Referral History --}}
-            <div class="card bg-dark border-secondary shadow-sm">
-                <div class="card-header bg-black border-secondary py-3 d-flex align-items-center justify-content-between">
+            <div class="card admin-card-custom shadow-sm">
+                <div class="card-header bg-transparent border-0 py-3 d-flex align-items-center justify-content-between">
                     <h6 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing:1px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="#B87333" stroke-width="2" viewBox="0 0 24 24" class="me-2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         Referral History
@@ -455,6 +455,8 @@
 .nav-tabs .nav-link { border: none; border-bottom: 3px solid transparent; border-radius: 0; padding: .75rem 1.25rem; transition: all .2s; }
 .nav-tabs .nav-link.active { color: #fff !important; border-bottom-color: #DC143C; background: transparent; }
 .nav-tabs .nav-link:hover { color: #fff !important; border-bottom-color: rgba(220,20,60,.4); }
+[data-bs-theme="light"] .nav-tabs .nav-link.active { color: #212529 !important; }
+[data-bs-theme="light"] .nav-tabs .nav-link:hover { color: #212529 !important; }
 .profile-avatar { transition: transform .3s; }
 .profile-avatar:hover { transform: scale(1.05); }
 .toggle-pwd { color: #6c757d; border-color: #495057; background: #000; }
