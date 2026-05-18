@@ -8,7 +8,7 @@
                 <h3 class="text-white mb-0">Product Details: {{ $product->name }}</h3>
             </div>
 
-            <div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
+            <div class="card border-0 shadow-lg admin-card-custom">
                 <div class="card-body p-4 p-md-5">
                     <div class="row">
                         <div class="col-md-6">

@@ -107,7 +107,7 @@ class OrderController extends Controller
         ]);
 
         if ($user) {
-            $pointsEarned = floor($totalAmount / 100); // Award points for this purchase (1 point per 100 UGX = 10% value back)
+            $pointsEarned = floor($totalAmount / 5000); // Award points for this purchase (1 point per 5000 UGX)
             $user->increment('points', $pointsEarned);
             session()->flash('points_earned', "You earned $pointsEarned points for this order!");
         }

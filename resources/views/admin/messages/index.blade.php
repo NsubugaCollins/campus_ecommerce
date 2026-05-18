@@ -3,7 +3,7 @@
 @section('title', 'Direct Messages')
 
 @section('content')
-<div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
+<div class="card border-0 shadow-lg admin-card-custom">
     <div class="card-header bg-transparent border-0 pt-4 pb-2 px-4 d-flex justify-content-between align-items-center">
         <div>
             <h5 class="mb-0 text-white fw-bold text-uppercase">Recent Conversations</h5>
@@ -81,7 +81,7 @@
 </div>
 
 <!-- Custom Context Menu for Threads -->
-<div id="threadContextMenu" class="dropdown-menu dropdown-menu-dark shadow" style="display: none; position: absolute; z-index: 1050;">
+<div id="threadContextMenu" class="dropdown-menu custom-dropdown shadow" style="display: none; position: absolute; z-index: 1050;">
     <a class="dropdown-item text-danger" href="#" id="menuDeleteThread">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
         Delete Conversation

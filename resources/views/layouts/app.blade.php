@@ -92,7 +92,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow border-0" aria-labelledby="navbarDropdown" style="background-color: #1e1e1e;">
+                                <div class="dropdown-menu dropdown-menu-end custom-dropdown shadow border-0" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->role === 'admin')
                                         <a class="dropdown-item py-2" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                                         <a class="dropdown-item py-2" href="{{ route('admin.profile') }}">Admin Profile</a>

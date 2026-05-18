@@ -6,7 +6,7 @@
 <div class="row g-4 mb-4">
     <!-- Total Sales -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border-left: 4px solid #DC143C !important;">
+        <div class="card border-0 shadow-sm h-100 admin-card-custom" style="border-left: 4px solid #DC143C !important;">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h6 class="mb-0 text-secondary text-uppercase fw-bold" style="letter-spacing: 1px;">Total Sales</h6>
@@ -23,7 +23,7 @@
     
     <!-- Active Users -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border-left: 4px solid #B87333 !important;">
+        <div class="card border-0 shadow-sm h-100 admin-card-custom" style="border-left: 4px solid #B87333 !important;">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h6 class="mb-0 text-secondary text-uppercase fw-bold" style="letter-spacing: 1px;">Users</h6>
@@ -40,7 +40,7 @@
 
     <!-- Total Orders -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border-left: 4px solid #198754 !important;">
+        <div class="card border-0 shadow-sm h-100 admin-card-custom" style="border-left: 4px solid #198754 !important;">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h6 class="mb-0 text-secondary text-uppercase fw-bold" style="letter-spacing: 1px;">Orders</h6>
@@ -57,7 +57,7 @@
 
     <!-- Total Products -->
     <div class="col-sm-6 col-xl-3">
-        <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border-left: 4px solid #0dcaf0 !important;">
+        <div class="card border-0 shadow-sm h-100 admin-card-custom" style="border-left: 4px solid #0dcaf0 !important;">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h6 class="mb-0 text-secondary text-uppercase fw-bold" style="letter-spacing: 1px;">Products</h6>
@@ -74,7 +74,7 @@
 </div>
 
 <!-- Recent Orders Table -->
-<div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
+<div class="card border-0 shadow-lg admin-card-custom">
     <div class="card-header bg-transparent border-0 pt-4 pb-2 px-4 d-flex justify-content-between align-items-center">
         <h5 class="mb-0 text-white fw-bold text-uppercase">Recent Orders</h5>
         <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-outline-secondary">View All</a>

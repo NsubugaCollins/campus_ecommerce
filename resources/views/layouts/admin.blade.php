@@ -12,59 +12,6 @@
     <link href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    
-    <style>
-        .admin-sidebar {
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            overflow-y: auto;
-            background-color: rgba(26, 26, 26, 0.95);
-            border-right: 1px solid rgba(184, 115, 51, 0.2);
-        }
-        .admin-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .admin-sidebar::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-        }
-        .admin-sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.25rem;
-            transition: all 0.3s ease;
-        }
-        .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
-            color: #fff;
-            background: rgba(220, 20, 60, 0.1);
-            border-left: 3px solid #DC143C;
-        }
-        .admin-content {
-            background-color: #121212;
-            min-height: 100vh;
-        }
-        .admin-topbar {
-            background-color: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .btn-crimson {
-            background-color: #DC143C;
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        .btn-crimson:hover {
-            background-color: #b01030;
-            color: white;
-            transform: translateY(-1px);
-        }
-        .text-crimson {
-            color: #DC143C !important;
-        }
-    </style>
 </head>
 <body class="antialiased">
     <div class="container-fluid p-0">
@@ -131,7 +78,7 @@
                             </div>
                             <span class="d-none d-sm-inline mx-1">{{ Auth::check() ? Auth::user()->name : 'Admin' }}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="background-color: #1e1e1e;">
+                        <ul class="dropdown-menu custom-dropdown text-small shadow">
                             <li><a class="dropdown-item" href="{{ route('admin.settings') }}">Settings</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
                             <li>

@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
+<div class="card border-0 shadow-lg admin-card-custom">
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-dark table-hover mb-0" style="background: transparent;">

@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            <div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem;">
+            <div class="card border-0 shadow-lg admin-card-custom">
                 <div class="card-body p-4 p-md-5">
                     <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                         @csrf

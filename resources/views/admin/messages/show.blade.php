@@ -5,7 +5,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-xl-10">
-        <div class="card border-0 shadow-lg overflow-hidden" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1.5rem;">
+        <div class="card border-0 shadow-lg overflow-hidden admin-card-custom" style="border-radius: 1.5rem;">
             <div class="card-header bg-transparent border-0 p-4 d-flex align-items-center justify-content-between" style="border-bottom: 1px solid rgba(255,255,255,0.05) !important;">
                 <div class="d-flex align-items-center">
                     <a href="{{ route('admin.messages.index') }}" class="btn btn-sm btn-outline-secondary me-3 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; border-radius: 50%;">
@@ -135,7 +135,7 @@
 </div>
 
 <!-- Custom Context Menu -->
-<div id="contextMenu" class="dropdown-menu dropdown-menu-dark shadow" style="display: none; position: absolute; z-index: 1050; min-width: 150px;">
+<div id="contextMenu" class="dropdown-menu custom-dropdown shadow" style="display: none; position: absolute; z-index: 1050; min-width: 150px;">
     <a class="dropdown-item" href="#" id="menuReply">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><polyline points="9 17 4 12 9 7"></polyline><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path></svg>
         Reply
@@ -156,7 +156,7 @@
 </div>
 
 <!-- Chat Background Context Menu -->
-<div id="chatContextMenu" class="dropdown-menu dropdown-menu-dark shadow" style="display: none; position: absolute; z-index: 1050; min-width: 180px;">
+<div id="chatContextMenu" class="dropdown-menu custom-dropdown shadow" style="display: none; position: absolute; z-index: 1050; min-width: 180px;">
     <a class="dropdown-item text-danger" href="#" id="menuDeleteThread">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
         Delete Entire Thread

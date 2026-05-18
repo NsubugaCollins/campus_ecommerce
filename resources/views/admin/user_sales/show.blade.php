@@ -18,7 +18,7 @@
     <div class="row g-4">
         <!-- Left: Product Info & Images -->
         <div class="col-lg-8">
-            <div class="card border-0 shadow-lg mb-4" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div class="card border-0 shadow-lg mb-4 admin-card-custom">
                 <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
@@ -96,7 +96,7 @@
         <!-- Right: Appraisal & Actions -->
         <div class="col-lg-4">
             <!-- Action Card -->
-            <div class="card border-0 shadow-lg mb-4" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div class="card border-0 shadow-lg mb-4 admin-card-custom">
                 <div class="card-body p-4">
                     <h5 class="text-white fw-bold mb-4 d-flex align-items-center">
                         <span class="me-2 text-primary">⚖️</span> Appraisal & Offer
@@ -145,7 +145,7 @@
             </div>
 
             <!-- Guidelines -->
-            <div class="card border-0 shadow-sm" style="background: rgba(30, 30, 30, 0.4); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.03);">
+            <div class="card border-0 shadow-sm admin-card-custom">
                 <div class="card-body p-4">
                     <h6 class="text-white-50 fw-bold mb-3 small text-uppercase">Trade-In Guidelines</h6>
                     <div class="small text-muted" style="line-height: 1.8;">

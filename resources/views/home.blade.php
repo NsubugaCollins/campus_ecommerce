@@ -87,7 +87,7 @@
                                             <div class="d-flex align-items-center">
                                                 @foreach($order->items->take(3) as $item)
                                                     <div class="rounded overflow-hidden bg-black d-flex align-items-center justify-content-center me-2 border border-secondary" style="width: 40px; height: 40px;">
-                                                        <img src="{{ asset('images/' . ($item->product->image ?? 'placeholder.jpg')) }}" alt="Product" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                                        <img src="{{ $item->product?->image_url ?? asset('images/placeholder.jpg') }}" alt="Product" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                                                     </div>
                                                 @endforeach
                                                 @if($order->items->count() > 3)
@@ -216,7 +216,7 @@
                         </div>
                         <h6 class="mb-0 fw-bold">Make Purchases</h6>
                     </div>
-                    <p class="text-white-50 small ps-5">Earn <strong>10 points for every UGX 1</strong> spent on our store. The more you shop, the more you earn.</p>
+                    <p class="text-white-50 small ps-5">Earn <strong>1 point for every 5,000 UGX</strong> spent on our store. The more you shop, the more you earn.</p>
                 </div>
 
                 <div class="mb-4">

@@ -1,51 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .product-details-card {
-        background: rgba(30, 30, 30, 0.7);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 1rem;
-        overflow: hidden;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    }
-    .product-img-large {
-        width: 100%;
-        height: auto;
-        max-height: 500px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-    }
-    .img-container {
-        background: #111;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        border-radius: 0.5rem;
-    }
-    .product-price {
-        color: #DC143C;
-        font-size: 2.5rem;
-        font-weight: 800;
-        letter-spacing: -1px;
-    }
-    .add-to-cart-lg {
-        background: #B87333;
-        color: #fff;
-        border: none;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .add-to-cart-lg:hover {
-        background: #A05E24;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(184, 115, 51, 0.3);
-        color: #fff;
-    }
-</style>
 
 <div class="container py-5">
 
@@ -123,7 +78,7 @@
                 <div class="mb-5">
                     <h5 class="text-white border-bottom border-secondary pb-2 mb-3">Product Details</h5>
                     @if($product->description)
-                        <p class="text-light" style="line-height: 1.8; opacity: 0.9;">
+                        <p class="text-body" style="line-height: 1.8;">
                             {!! nl2br(e($product->description)) !!}
                         </p>
                     @else
