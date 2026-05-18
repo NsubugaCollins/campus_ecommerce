@@ -16,8 +16,8 @@
     <div class="row">
         <div class="col-12">
             @forelse($orders as $order)
-                <div class="card bg-dark border-secondary mb-4 shadow-sm">
-                    <div class="card-header bg-black border-secondary d-flex justify-content-between align-items-center py-3">
+                <div class="card admin-card-custom mb-4 shadow-sm">
+                    <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center py-3">
                         <div>
                             <span class="text-white-50 small me-3">Order #{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</span>
                             <span class="text-white-50 small">Placed on {{ $order->created_at->format('M d, Y') }}</span>
@@ -60,7 +60,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer bg-black border-secondary d-flex justify-content-between align-items-center py-3">
+                    <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center py-3">
                         <div>
                             <small class="text-white-50 d-block">Delivery To: <span class="text-white">{{ $order->shipping_address }}</span></small>
                             <small class="text-white-50 d-block">Payment: <span class="text-white text-capitalize">{{ str_replace('_', ' ', $order->payment_method) }}</span></small>
@@ -91,7 +91,7 @@
                 <!-- Rating Modal -->
                 <div class="modal fade" id="ratingModal{{ $order->id }}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content bg-dark border-secondary">
+                        <div class="modal-content admin-card-custom">
                             <div class="modal-header border-secondary">
                                 <h5 class="modal-title text-white">Rate Your Experience</h5>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="comment" class="form-label text-white-50">Comment (Optional)</label>
-                                        <textarea name="comment" class="form-control bg-black border-secondary text-white" rows="3" placeholder="Tell us more about your experience..."></textarea>
+                                        <textarea name="comment" class="form-control bg-transparent border-0 text-white" rows="3" placeholder="Tell us more about your experience..."></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer border-secondary">
@@ -134,7 +134,7 @@
                 </div>
                 @endif
             @empty
-                <div class="card bg-dark border-secondary text-center py-5">
+                <div class="card admin-card-custom text-center py-5">
                     <div class="card-body">
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-secondary mb-3"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                         <h4 class="text-white mb-3">You haven't placed any orders yet.</h4>

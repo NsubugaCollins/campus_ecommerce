@@ -5,7 +5,7 @@
     <!-- Welcome Banner -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card bg-dark border-secondary shadow-sm overflow-hidden" style="position: relative;">
+            <div class="card admin-card-custom shadow-sm overflow-hidden" style="position: relative;">
                 <div style="position: absolute; top: 0; right: 0; width: 150px; height: 100%; background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.1));"></div>
                 <div class="card-body p-4 d-flex align-items-center">
                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-4" style="width: 80px; height: 80px; font-weight: bold; font-size: 2rem; box-shadow: 0 0 20px rgba(184, 115, 51, 0.3);">
@@ -32,7 +32,7 @@
         <div class="col-lg-8">
             <div class="row g-4 mb-4">
                 <div class="col-md-3">
-                    <div class="card bg-dark border-secondary h-100 shadow-sm text-center py-4 hover-lift">
+                    <div class="card admin-card-custom h-100 shadow-sm text-center py-4 hover-lift">
                         <div class="card-body">
                             <h3 class="text-white fw-bold display-5 mb-2">{{ $totalOrders }}</h3>
                             <p class="text-white-50 text-uppercase small letter-spacing-1 mb-0">Total Orders</p>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card bg-dark border-secondary h-100 shadow-sm text-center py-4 hover-lift">
+                    <div class="card admin-card-custom h-100 shadow-sm text-center py-4 hover-lift">
                         <div class="card-body">
                             <h3 class="text-warning fw-bold display-5 mb-2">{{ $pendingOrders }}</h3>
                             <p class="text-white-50 text-uppercase small letter-spacing-1 mb-0">Pending Orders</p>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card bg-dark border-secondary h-100 shadow-sm text-center py-4 hover-lift" style="border-bottom: 3px solid #ffc107 !important;">
+                    <div class="card admin-card-custom h-100 shadow-sm text-center py-4 hover-lift" style="border-bottom: 3px solid #ffc107 !important;">
                         <div class="card-body">
                             <h3 class="text-warning fw-bold display-5 mb-2">{{ $user->points }}</h3>
                             <p class="text-white-50 text-uppercase small letter-spacing-1 mb-0">Reward Points</p>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card bg-dark border-secondary h-100 shadow-sm text-center py-4 hover-lift">
+                    <div class="card admin-card-custom h-100 shadow-sm text-center py-4 hover-lift">
                         <div class="card-body">
                             <h3 class="text-white fw-bold display-6 mb-2 mt-2">{{ $user->created_at->format('M Y') }}</h3>
                             <p class="text-white-50 text-uppercase small letter-spacing-1 mb-0">Member Since</p>
@@ -66,8 +66,8 @@
             </div>
 
             <!-- Recent Orders -->
-            <div class="card bg-dark border-secondary shadow-sm">
-                <div class="card-header bg-black border-secondary d-flex justify-content-between align-items-center py-3">
+            <div class="card admin-card-custom shadow-sm">
+                <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center py-3">
                     <h5 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing: 1px;">Recent Orders</h5>
                     @if($recentOrders->count() > 0)
                         <a href="{{ route('orders.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
@@ -125,7 +125,7 @@
 
         <!-- Sidebar Actions -->
         <div class="col-lg-4">
-            <div class="card bg-dark border-secondary shadow-sm mb-4">
+            <div class="card admin-card-custom shadow-sm mb-4">
                 <div class="card-header bg-transparent border-secondary py-3">
                     <h5 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing: 1px;">Quick Actions</h5>
                 </div>
@@ -157,7 +157,7 @@
             </div>
 
             <!-- Referral Program Card -->
-            <div class="card bg-dark border-secondary shadow-sm mb-4">
+            <div class="card admin-card-custom shadow-sm mb-4">
                 <div class="card-header bg-transparent border-secondary py-3 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-white fw-bold text-uppercase" style="letter-spacing: 1px;">Referral Program</h5>
                     <button class="btn btn-sm btn-link text-warning text-decoration-none p-0" data-bs-toggle="modal" data-bs-target="#rewardModal">How it works?</button>
@@ -165,7 +165,7 @@
                 <div class="card-body">
                     <p class="text-white-50 small mb-2">Share your link and earn <strong class="text-white">50 pts</strong> for every friend who signs up!</p>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-black border-secondary text-white" value="{{ url('/register?ref=' . $user->referral_code) }}" id="dashShareLink" readonly style="font-size:.8rem;">
+                        <input type="text" class="form-control bg-transparent border-0 text-white" value="{{ url('/register?ref=' . $user->referral_code) }}" id="dashShareLink" readonly style="font-size:.8rem;">
                         <button class="btn btn-primary fw-bold" type="button" id="dashCopyBtn" onclick="dashCopyLink()">Copy Link</button>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
@@ -190,7 +190,7 @@
 <!-- Reward Info Modal -->
 <div class="modal fade" id="rewardModal" tabindex="-1" aria-labelledby="rewardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark border-secondary text-white">
+        <div class="modal-content admin-card-custom text-white">
             <div class="modal-header border-secondary bg-black">
                 <h5 class="modal-title fw-bold text-uppercase" id="rewardModalLabel" style="letter-spacing: 1px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-warning me-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
