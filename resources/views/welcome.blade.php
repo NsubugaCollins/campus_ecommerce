@@ -40,20 +40,11 @@
                     <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                 </div>
                 <div class="carousel-inner h-100">
-                    @php
-                        // Find the actual generated image filenames
-                        $hero1 = glob(public_path('images/hero_banner_1_*.png'))[0] ?? null;
-                        $hero2 = glob(public_path('images/hero_banner_2_*.png'))[0] ?? null;
-                        
-                        $hero1Name = $hero1 ? basename($hero1) : 'placeholder.jpg';
-                        $hero2Name = $hero2 ? basename($hero2) : 'placeholder.jpg';
-                    @endphp
-                    
                     <div class="carousel-item active h-100">
-                        <img src="{{ asset('images/' . $hero1Name) }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
+                        <img src="{{ asset('images/scroll1.jpeg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
                     </div>
                     <div class="carousel-item h-100">
-                        <img src="{{ asset('images/' . $hero2Name) }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
+                        <img src="{{ asset('images/scroll2.jpeg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
