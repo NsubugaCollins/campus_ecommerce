@@ -296,8 +296,8 @@
                             @php
                                 $ways = [
                                     ['label'=>'Refer a Friend',  'pts'=>'+50 pts', 'color'=>'text-primary',  'bg'=>'rgba(13,110,253,.15)'],
-                                    ['label'=>'Every UGX 1 Spent',  'pts'=>'+10 pts', 'color'=>'text-success',  'bg'=>'rgba(25,135,84,.15)'],
-                                    ['label'=>'Daily Login',      'pts'=>'+5 pts',  'color'=>'text-info',     'bg'=>'rgba(13,202,240,.15)'],
+                                    ['label'=>'Every 5,000 UGX Spent',  'pts'=>'+1 pt', 'color'=>'text-success',  'bg'=>'rgba(25,135,84,.15)'],
+                                    ['label'=>'Daily Login',      'pts'=>'+10 pts',  'color'=>'text-info',     'bg'=>'rgba(13,202,240,.15)'],
                                 ]
                             @endphp
                             @foreach($ways as $w)
