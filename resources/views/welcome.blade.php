@@ -71,7 +71,7 @@
                     <small class="text-danger fw-bold">Up to 50% Off</small>
                 </div>
             </div>
-            <div class="side-banner position-relative" style="background-image: url('{{ asset('images/' . $side2Name) }}');">
+            <div class="side-banner position-relative" style="background-image: url('{{ asset('images/delivery.jpg') }}');">
                 <div class="position-absolute bottom-0 w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
                     <h5 class="text-white mb-0">Cycle Delivery</h5>
                     <small class="text-warning fw-bold">Fast & Secure</small>
