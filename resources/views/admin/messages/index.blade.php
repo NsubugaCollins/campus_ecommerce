@@ -10,8 +10,8 @@
             <p class="text-muted small">Manage and respond to user inquiries.</p>
         </div>
         <div class="btn-group shadow-sm">
-            <a href="{{ route('admin.messages.index') }}" class="btn btn-primary px-3 active">Conversations</a>
-            <a href="{{ route('admin.messages.all') }}" class="btn btn-outline-secondary px-3">All Messages</a>
+            <a href="{{ route('admin.messages.threads') }}" class="btn btn-primary px-3 active">Conversations</a>
+            <a href="{{ route('admin.messages.index') }}" class="btn btn-outline-secondary px-3">All Messages</a>
         </div>
     </div>
     <div class="card-body p-0">

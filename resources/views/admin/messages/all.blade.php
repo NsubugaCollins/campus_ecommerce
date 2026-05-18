@@ -9,8 +9,8 @@
         <p class="text-muted small">Viewing all system messages across all conversations.</p>
     </div>
     <div class="btn-group shadow-sm">
-        <a href="{{ route('admin.messages.index') }}" class="btn btn-outline-secondary px-3">Conversations</a>
-        <a href="{{ route('admin.messages.all') }}" class="btn btn-primary px-3 active">All Messages</a>
+        <a href="{{ route('admin.messages.threads') }}" class="btn btn-outline-secondary px-3">Conversations</a>
+        <a href="{{ route('admin.messages.index') }}" class="btn btn-primary px-3 active">All Messages</a>
     </div>
 </div>
 

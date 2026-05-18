@@ -1,99 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Add Custom CSS for Product Cards and Animations -->
-<style>
-    .category-menu {
-        background: rgba(30, 30, 30, 0.6);
-        backdrop-filter: blur(15px);
-        border-radius: 0.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        height: 100%;
-    }
-    .category-menu .nav-link {
-        color: rgba(255, 255, 255, 0.8);
-        padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
-    }
-    .category-menu .nav-link:hover {
-        color: #DC143C;
-        background: rgba(220, 20, 60, 0.1);
-        padding-left: 1.5rem;
-    }
-    .hero-carousel {
-        border-radius: 0.5rem;
-        overflow: hidden;
-        height: 450px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    @media (max-width: 991.98px) {
-        .hero-carousel { height: 350px; }
-    }
-    @media (max-width: 767.98px) {
-        .hero-carousel { height: 250px; }
-    }
-    .side-banner {
-        border-radius: 0.5rem;
-        overflow: hidden;
-        height: calc(50% - 0.5rem);
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-    }
-    .side-banner:hover {
-        transform: scale(1.02);
-    }
-    .product-card {
-        background: rgba(30, 30, 30, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-        overflow: hidden;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(220, 20, 60, 0.15);
-        border-color: rgba(220, 20, 60, 0.3);
-    }
-    .product-img-wrapper {
-        height: 200px;
-        overflow: hidden;
-        background: #111;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .product-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 0.5rem;
-        transition: transform 0.5s ease;
-    }
-    .product-card:hover .product-img {
-        transform: scale(1.05);
-    }
-    .add-to-cart-btn {
-        background: transparent;
-        color: #B87333;
-        border: 1px solid #B87333;
-        transition: all 0.3s ease;
-    }
-    .add-to-cart-btn:hover {
-        background: #B87333;
-        color: #fff;
-        transform: scale(1.05);
-    }
-    .section-title {
-        border-left: 4px solid #DC143C;
-        padding-left: 10px;
-        letter-spacing: 1px;
-    }
-</style>
+
 
 <div class="container py-4">
     <!-- Hero Section (Jumia Style Grid) -->
@@ -182,7 +90,7 @@
     </div>
 
     <!-- Flash Sales Section -->
-    <div class="mb-5 rounded-3 p-4" style="background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(30, 30, 30, 0.8) 100%); border: 1px solid rgba(220, 20, 60, 0.2);">
+    <div class="mb-5 rounded-3 p-4 flash-sale-container">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
             <div class="d-flex align-items-center gap-3">
                 <h3 class="text-white mb-0 text-uppercase fw-bold"><i class="text-danger me-2">⚡</i> Flash Sales</h3>
@@ -210,7 +118,7 @@
     <!-- Category Sections -->
     @foreach($categoryProducts as $category => $products)
         @if($products->count() > 0)
-        <div class="mb-5 p-4 rounded-3" style="background-color: rgba(30, 30, 30, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="mb-5 p-4 rounded-3 category-container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="text-white mb-0 text-capitalize section-title">{{ $category }}</h4>
                 <a href="{{ route('product.category', $category) }}" class="text-decoration-none text-primary fw-bold" style="color: #B87333 !important;">View Category ></a>
@@ -242,12 +150,12 @@
     </div>
 
     <!-- Promotional Strip -->
-    <div class="rounded-3 overflow-hidden position-relative mb-5 shadow-lg" style="height: 150px; background: linear-gradient(45deg, #1a1a1a, #DC143C);">
+    <div class="rounded-3 overflow-hidden position-relative mb-5 shadow-lg promo-strip-container" style="height: 150px;">
         <div class="position-absolute w-100 h-100" style="background: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         <div class="d-flex align-items-center justify-content-center h-100 position-relative z-index-1">
             <div class="text-center px-4">
                 <h2 class="text-white fw-bold text-uppercase mb-1" style="letter-spacing: 2px;">Cycle Mega Sale</h2>
-                <p class="text-white-50 mb-0">Free delivery on all orders above UGX 50,000</p>
+                <p class="text-white-50 mb-0">free delivery around MAKERERE</p>
             </div>
         </div>
     </div>
