@@ -632,3 +632,17 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(220, 20, 60, 0.25) !important;
 }
 
+/* Custom micro-animations and styling for the Start Shopping button */
+.start-shopping-btn {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.start-shopping-btn:hover {
+    transform: translateY(-4px) scale(1.05) !important;
+    box-shadow: 0 10px 25px rgba(220, 20, 60, 0.5) !important;
+}
+
+.start-shopping-btn:active {
+    transform: translateY(-1px) scale(1.02) !important;
+}
+

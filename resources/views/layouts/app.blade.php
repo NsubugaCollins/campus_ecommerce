@@ -122,8 +122,20 @@
             </div>
         </nav>
 
-        <main class="flex-grow-1 d-flex align-items-center">
-            @yield('content')
+        <main class="flex-grow-1 d-flex flex-column justify-content-center">
+            <div class="w-100">
+                @yield('content')
+            </div>
+            @auth
+                @if(!request()->is('/'))
+                    <div class="container text-center my-4 pb-4">
+                        <a href="{{ url('/') }}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold text-uppercase shadow start-shopping-btn" style="letter-spacing: 1.5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-2 align-middle"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                            Start Shopping
+                        </a>
+                    </div>
+                @endif
+            @endauth
         </main>
         <footer class="pt-5 pb-4 mt-auto" style="background-color: #121212; border-top: 1px solid rgba(255,255,255,0.05);">
             <div class="container">

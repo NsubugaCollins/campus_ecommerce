@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install zip pdo pdo_pgsql gd
 
+# Configure PHP settings for larger file uploads
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && echo "upload_max_filesize = 120M" > "$PHP_INI_DIR/conf.d/uploads.ini" \
+    && echo "post_max_size = 125M" >> "$PHP_INI_DIR/conf.d/uploads.ini" \
+    && echo "memory_limit = 512M" >> "$PHP_INI_DIR/conf.d/uploads.ini"
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
