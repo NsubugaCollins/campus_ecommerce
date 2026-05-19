@@ -22,6 +22,10 @@ class SendWelcomeEmail
      */
     public function handle(UserCreated $event): void
     {
-        $event->user->notify(new WelcomeNotification());
+        try {
+            $event->user->notify(new WelcomeNotification());
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error("Failed to send welcome email to user {$event->user->id}: " . $e->getMessage());
+        }
     }
 }
