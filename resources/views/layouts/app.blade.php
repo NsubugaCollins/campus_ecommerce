@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $siteSettings['store_name'] ?? 'Cycle' }} - Premium E-Commerce</title>
+    <title>{{ $siteSettings['store_name'] ?? 'Cycle' }} - Sharing Economy Platform</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- Bootstrap CSS -->
