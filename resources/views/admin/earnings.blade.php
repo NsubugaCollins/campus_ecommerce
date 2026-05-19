@@ -71,6 +71,17 @@
 
 <script src="{{ asset('vendor/chartjs/chart.min.js') }}"></script>
 <script>
+    function getChartThemeColors(theme) {
+        const isLight = theme === 'light';
+        return {
+            text: isLight ? '#212529' : 'rgba(255, 255, 255, 0.7)',
+            grid: isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)'
+        };
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'dark';
+    let colors = getChartThemeColors(currentTheme);
+
     // Monthly Earnings Chart
     const earningsCtx = document.getElementById('earningsChart').getContext('2d');
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -80,7 +91,7 @@
         earningsData[item.month - 1] = item.total;
     });
 
-    new Chart(earningsCtx, {
+    const earningsChart = new Chart(earningsCtx, {
         type: 'bar',
         data: {
             labels: months,
@@ -100,12 +111,12 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: 'rgba(255, 255, 255, 0.5)' }
+                    grid: { color: colors.grid },
+                    ticks: { color: colors.text }
                 },
                 x: {
                     grid: { display: false },
-                    ticks: { color: 'rgba(255, 255, 255, 0.5)' }
+                    ticks: { color: colors.text }
                 }
             }
         }
@@ -113,7 +124,7 @@
 
     // Payment Method Chart
     const paymentCtx = document.getElementById('paymentMethodChart').getContext('2d');
-    new Chart(paymentCtx, {
+    const paymentChart = new Chart(paymentCtx, {
         type: 'pie',
         data: {
             labels: {!! json_encode($paymentMethodData->pluck('payment_method')->map(fn($m) => str_replace('_', ' ', strtoupper($m)))) !!},
@@ -131,6 +142,17 @@
                 }
             }
         }
+    });
+
+    window.addEventListener('theme-changed', (e) => {
+        const newTheme = e.detail.theme;
+        const newColors = getChartThemeColors(newTheme);
+        
+        // Update Monthly Earnings Chart
+        earningsChart.options.scales.y.grid.color = newColors.grid;
+        earningsChart.options.scales.y.ticks.color = newColors.text;
+        earningsChart.options.scales.x.ticks.color = newColors.text;
+        earningsChart.update();
     });
 </script>
 @endsection

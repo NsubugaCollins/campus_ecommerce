@@ -83,9 +83,20 @@
 
 <script src="{{ asset('vendor/chartjs/chart.min.js') }}"></script>
 <script>
+    function getChartThemeColors(theme) {
+        const isLight = theme === 'light';
+        return {
+            text: isLight ? '#212529' : 'rgba(255, 255, 255, 0.7)',
+            grid: isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)'
+        };
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'dark';
+    let colors = getChartThemeColors(currentTheme);
+
     // Sales Chart
     const salesCtx = document.getElementById('salesChart').getContext('2d');
-    new Chart(salesCtx, {
+    const salesChart = new Chart(salesCtx, {
         type: 'line',
         data: {
             labels: {!! json_encode($salesData->pluck('date')) !!},
@@ -108,12 +119,12 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: 'rgba(255, 255, 255, 0.5)' }
+                    grid: { color: colors.grid },
+                    ticks: { color: colors.text }
                 },
                 x: {
                     grid: { display: false },
-                    ticks: { color: 'rgba(255, 255, 255, 0.5)' }
+                    ticks: { color: colors.text }
                 }
             }
         }
@@ -121,7 +132,7 @@
 
     // Status Chart
     const statusCtx = document.getElementById('statusChart').getContext('2d');
-    new Chart(statusCtx, {
+    const statusChart = new Chart(statusCtx, {
         type: 'doughnut',
         data: {
             labels: {!! json_encode($orderStatusData->pluck('status')) !!},
@@ -136,10 +147,25 @@
             plugins: {
                 legend: {
                     position: 'bottom',
-                    labels: { color: 'rgba(255, 255, 255, 0.7)', padding: 20 }
+                    labels: { color: colors.text, padding: 20 }
                 }
             }
         }
+    });
+
+    window.addEventListener('theme-changed', (e) => {
+        const newTheme = e.detail.theme;
+        const newColors = getChartThemeColors(newTheme);
+        
+        // Update Sales Chart
+        salesChart.options.scales.y.grid.color = newColors.grid;
+        salesChart.options.scales.y.ticks.color = newColors.text;
+        salesChart.options.scales.x.ticks.color = newColors.text;
+        salesChart.update();
+        
+        // Update Status Chart
+        statusChart.options.plugins.legend.labels.color = newColors.text;
+        statusChart.update();
     });
 </script>
 @endsection

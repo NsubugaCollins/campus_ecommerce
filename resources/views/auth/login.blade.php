@@ -7,8 +7,8 @@
         <div class="col-md-6 col-lg-5">
             <div class="card border-0 shadow-lg overflow-hidden" style="border-radius: 1rem;">
                 <div class="card-header text-center py-4 bg-transparent border-0">
-                    <h3 class="mb-0 fw-bold" style="color: #fff; letter-spacing: 1px;">Welcome Back</h3>
-                    <p class="text-muted small mt-2 mb-0" style="color: rgba(255,255,255,0.9) !important;">Sign in to your Cycle account</p>
+                    <h3 class="mb-0 fw-bold text-white" style="letter-spacing: 1px;">Welcome Back</h3>
+                    <p class="text-muted small mt-2 mb-0">Sign in to your Cycle account</p>
                 </div>
 
                 <div class="card-body p-4 p-md-5 pt-0">

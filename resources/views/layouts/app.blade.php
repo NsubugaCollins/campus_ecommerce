@@ -251,6 +251,7 @@
                     sunIcon.classList.remove('d-none');
                     moonIcon.classList.add('d-none');
                 }
+                window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: theme } }));
             }
         });
     </script>

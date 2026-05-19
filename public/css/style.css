@@ -606,3 +606,15 @@ body {
     background-color: #f8f9fa;
 }
 
+[data-bs-theme="light"] .btn-outline-light {
+    color: #212529 !important;
+    border-color: #ced4da !important;
+}
+[data-bs-theme="light"] .btn-outline-light:hover {
+    background-color: #e9ecef !important;
+    color: #212529 !important;
+}
+[data-bs-theme="light"] tr, [data-bs-theme="light"] thead {
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
