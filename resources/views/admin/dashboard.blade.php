@@ -101,7 +101,7 @@
                         <td class="px-4 py-3 border-0 align-middle text-muted">{{ $order->created_at->diffForHumans() }}</td>
                         <td class="px-4 py-3 border-0 align-middle fw-bold">UGX {{ number_format($order->total_amount, 2) }}</td>
                         <td class="px-4 py-3 border-0 align-middle">
-                            <span class="badge {{ $order->status == 'completed' ? 'bg-success' : ($order->status == 'cancelled' ? 'bg-danger' : 'bg-warning') }} bg-opacity-25 border border-opacity-50">
+                            <span class="badge {{ $order->status == 'completed' ? 'bg-success text-success' : ($order->status == 'cancelled' ? 'bg-danger text-danger' : 'bg-warning text-warning') }} bg-opacity-25 border border-opacity-50">
                                 {{ ucfirst($order->status) }}
                             </span>
                         </td>
