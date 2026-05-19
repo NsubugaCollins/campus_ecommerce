@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UserCreated::class => [
-            //
+            \App\Listeners\SendWelcomeEmail::class,
         ],
         OrderCreated::class => [
             //
