@@ -43,10 +43,10 @@
                 </div>
                 <div class="carousel-inner h-100">
                     <div class="carousel-item active h-100">
-                        <img src="{{ asset('images/scroll1.jpeg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
+                        <img src="{{ asset('images/scroll1.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
                     </div>
                     <div class="carousel-item h-100">
-                        <img src="{{ asset('images/scroll2.jpeg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
+                        <img src="{{ asset('images/scroll2.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
@@ -182,6 +182,16 @@
 
         setInterval(updateTimer, 1000);
         updateTimer();
+
+        // Explicitly initialize and start the carousel auto-scrolling
+        const heroCarousel = document.querySelector('#heroCarousel');
+        if (heroCarousel) {
+            new bootstrap.Carousel(heroCarousel, {
+                interval: 3000,
+                ride: 'carousel',
+                wrap: true
+            });
+        }
     });
 </script>
 @endsection
