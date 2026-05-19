@@ -138,6 +138,13 @@
         color: #fff !important;
         border-bottom: 2px solid #DC143C !important;
     }
+    [data-bs-theme="light"] .nav-tabs .nav-link {
+        color: rgba(33, 37, 41, 0.6) !important;
+    }
+    [data-bs-theme="light"] .nav-tabs .nav-link.active {
+        color: #212529 !important;
+        border-bottom: 2px solid #DC143C !important;
+    }
     .btn-crimson {
         background-color: #DC143C;
         color: white;

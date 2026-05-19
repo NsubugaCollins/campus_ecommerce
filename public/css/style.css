@@ -618,3 +618,17 @@ body {
     border-bottom-color: rgba(0, 0, 0, 0.1) !important;
 }
 
+[data-bs-theme="light"] .form-control,
+[data-bs-theme="light"] .form-select {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border-color: #ced4da !important;
+}
+[data-bs-theme="light"] .form-control:focus,
+[data-bs-theme="light"] .form-select:focus {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border-color: #DC143C !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 20, 60, 0.25) !important;
+}
+
