@@ -253,6 +253,12 @@ body {
     border: 0;
 }
 
+.glass-card {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 /* Custom Dropdown */
 .custom-dropdown {
     background-color: #1e1e1e;
@@ -265,6 +271,7 @@ body {
 [data-bs-theme="light"] body {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     color: #212529;
+    --bs-body-color: #212529;
 }
 
 [data-bs-theme="light"] .text-muted {
@@ -341,7 +348,7 @@ body {
     border-color: #dee2e6 !important;
 }
 
-[data-bs-theme="light"] .text-white {
+[data-bs-theme="light"] .text-white:not(.btn *, .btn, .bg-primary *, .bg-primary, .bg-danger *, .bg-danger, .bg-success *, .bg-success, .bg-warning *, .bg-warning, .bg-info *, .bg-info, .badge *, .badge, .side-banner *, .side-banner, .overlay-dark *, .overlay-dark) {
     color: #212529 !important;
 }
 
@@ -581,6 +588,11 @@ body {
 [data-bs-theme="light"] .admin-card-custom {
     background: #ffffff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="light"] .glass-card {
+    background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 [data-bs-theme="light"] .custom-dropdown {

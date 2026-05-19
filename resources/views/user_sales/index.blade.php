@@ -27,7 +27,7 @@
     <div class="row g-4">
         @forelse($sales as $sale)
             <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm h-100 overflow-hidden" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease;">
+                <div class="card border-0 shadow-sm h-100 overflow-hidden glass-card" style="transition: transform 0.3s ease;">
                     <style>
                         .trade-in-card:hover { transform: translateY(-5px); }
                     </style>

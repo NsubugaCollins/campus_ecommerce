@@ -4,7 +4,7 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-lg" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05);">
+            <div class="card border-0 shadow-lg glass-card">
                 <div class="card-header border-0 bg-transparent pt-4 pb-0 text-center">
                     <h2 class="text-white fw-bold text-uppercase mb-1" style="letter-spacing: 2px;">Sell to Us</h2>
                     <p class="text-muted small">Submit your product for a quick appraisal and offer from our team.</p>

@@ -18,7 +18,7 @@
     <div class="row g-4">
         <!-- Left: Images -->
         <div class="col-lg-7">
-            <div class="card border-0 shadow-sm overflow-hidden" style="background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem;">
+            <div class="card border-0 shadow-sm overflow-hidden glass-card" style="border-radius: 1rem;">
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @forelse($userSale->images as $index => $image)
@@ -58,7 +58,7 @@
 
         <!-- Right: Details -->
         <div class="col-lg-5">
-            <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem;">
+            <div class="card border-0 shadow-sm h-100 glass-card" style="border-radius: 1rem;">
                 <div class="card-body p-4 p-md-5">
                     <div class="mb-4">
                         <span class="badge rounded-pill shadow-sm 

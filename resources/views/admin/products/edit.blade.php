@@ -53,6 +53,8 @@
                                 <option value="Beddings" {{ old('category', $product->category) == 'Beddings' ? 'selected' : '' }}>Beddings</option>
                                 <option value="Fashion" {{ old('category', $product->category) == 'Fashion' ? 'selected' : '' }}>Fashion</option>
                                 <option value="Accessories" {{ old('category', $product->category) == 'Accessories' ? 'selected' : '' }}>Accessories</option>
+                                <option value="Grocery" {{ old('category', $product->category) == 'Grocery' ? 'selected' : '' }}>Grocery</option>
+                                <option value="Kitchenware" {{ old('category', $product->category) == 'Kitchenware' ? 'selected' : '' }}>Kitchenware</option>
                             </select>
                             @error('category')
                                 <span class="invalid-feedback" role="alert">

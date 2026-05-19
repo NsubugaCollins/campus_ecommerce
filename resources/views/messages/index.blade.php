@@ -4,7 +4,7 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border-0 shadow-lg overflow-hidden" style="background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(20px); border-radius: 1.5rem;">
+            <div class="card border-0 shadow-lg overflow-hidden glass-card" style="border-radius: 1.5rem;">
                 <div class="card-header bg-primary text-white p-4 d-flex align-items-center">
                     <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem;">
                         {{ substr($admin->name, 0, 1) }}

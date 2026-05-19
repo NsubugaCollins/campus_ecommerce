@@ -21,6 +21,8 @@
                             'Beauty' => '💄',
                             'Scholastic Materials' => '📚',
                             'Sporting Goods' => '⚽',
+                            'Grocery' => '🛒',
+                            'Kitchenware' => '🍳',
                         ];
                     @endphp
                     @foreach($categories as $category)

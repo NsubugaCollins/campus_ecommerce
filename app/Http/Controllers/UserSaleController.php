@@ -24,7 +24,8 @@ class UserSaleController extends Controller
         // Define some standard categories
         $categories = [
             'Electronics', 'Furniture', 'Beddings', 'Fashion', 
-            'Accessories', 'Beauty', 'Scholastic Materials', 'Sporting Goods'
+            'Accessories', 'Beauty', 'Scholastic Materials', 'Sporting Goods',
+            'Grocery', 'Kitchenware'
         ];
         
         return view('user_sales.create', compact('categories'));
