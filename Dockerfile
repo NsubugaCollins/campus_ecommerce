@@ -41,5 +41,5 @@ RUN php artisan storage:link --force \
 # Expose the port
 EXPOSE 10000
 
-# Start the server and run migrations
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
+# Start the queue worker in the background, then run migrations and start the server
+CMD bash -c "php artisan queue:work & php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000"

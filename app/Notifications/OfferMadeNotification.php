@@ -6,8 +6,9 @@ use App\Models\UserSale;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OfferMadeNotification extends Notification
+class OfferMadeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
