@@ -334,6 +334,24 @@ body {
     --bs-table-bg: #ffffff;
     --bs-table-color: #212529;
     --bs-table-border-color: #dee2e6;
+    --bs-table-hover-bg: rgba(220, 20, 60, 0.06);
+    --bs-table-hover-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.025);
+    --bs-table-striped-color: #212529;
+    --bs-table-active-bg: rgba(220, 20, 60, 0.1);
+    --bs-table-active-color: #212529;
+}
+
+/* Ensure table-dark rows render correctly in light mode */
+[data-bs-theme="light"] .table-dark > :not(caption) > * > * {
+    background-color: var(--bs-table-bg) !important;
+    color: var(--bs-table-color) !important;
+    border-bottom-color: var(--bs-table-border-color) !important;
+}
+
+[data-bs-theme="light"] .table-dark.table-hover > tbody > tr:hover > * {
+    background-color: var(--bs-table-hover-bg) !important;
+    color: var(--bs-table-hover-color) !important;
 }
 
 [data-bs-theme="light"] .bg-dark {
@@ -382,10 +400,22 @@ body {
     color: #495057;
 }
 
-[data-bs-theme="light"] .admin-sidebar .nav-link:hover, 
+[data-bs-theme="light"] .admin-sidebar .nav-link:hover,
 [data-bs-theme="light"] .admin-sidebar .nav-link.active {
-    color: #DC143C;
-    background: rgba(220, 20, 60, 0.05);
+    color: #DC143C !important;
+    background: rgba(220, 20, 60, 0.08) !important;
+    border-left: 3px solid #DC143C;
+}
+
+/* Admin topbar text in light mode */
+[data-bs-theme="light"] .admin-topbar h5,
+[data-bs-theme="light"] .admin-topbar .nav-link {
+    color: #212529 !important;
+}
+
+/* Admin topbar theme-toggle icon in light mode */
+[data-bs-theme="light"] .admin-topbar #themeToggle {
+    color: #495057 !important;
 }
 
 [data-bs-theme="light"] .admin-content {
