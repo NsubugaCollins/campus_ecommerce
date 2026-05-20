@@ -6,16 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeNotification extends Notification
+class PointsUsedNotification extends Notification
 {
     use Queueable;
+
+    public int $pointsUsed;
+    public float $discount;
+    public int $remainingPoints;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(int $pointsUsed, float $discount, int $remainingPoints)
     {
-        //
+        $this->pointsUsed = $pointsUsed;
+        $this->discount = $discount;
+        $this->remainingPoints = $remainingPoints;
     }
 
     /**
@@ -39,17 +45,16 @@ class WelcomeNotification extends Notification
         $storeAddress = \App\Models\Setting::get('store_address', 'Main Campus Plaza, Block A');
 
         return (new MailMessage)
-            ->subject("Welcome to {$storeName}!")
+            ->subject("Reward Points Redeemed - {$storeName}")
             ->greeting("Hello {$notifiable->name},")
-            ->line("Welcome to {$storeName} – your campus sharing economy platform! We are thrilled to have you join our community.")
-            ->line("With {$storeName}, you can buy and sell items directly within the campus community, negotiate trade-ins, and earn rewards.")
-            ->line("Here is a quick overview of what you can do:")
-            ->line("• Browse and shop premium deals directly on the platform.")
-            ->line("• Sell your own products or negotiate trade-ins.")
-            ->line("• Refer friends using your unique referral code ({$notifiable->referral_code}) to earn reward points!")
-            ->action('Start Shopping Now', url('/'))
-            ->line("If you have any questions, feel free to contact us.")
-            ->line("Thank you for being part of {$storeName}!")
+            ->line("You have successfully redeemed reward points for a discount on your purchase!")
+            ->line("Here is your point transaction summary:")
+            ->line("• Points Redeemed: {$this->pointsUsed} points")
+            ->line("• Discount Received: UGX " . number_format($this->discount, 2))
+            ->line("• Remaining Balance: {$this->remainingPoints} points")
+            ->action('Continue Shopping', url('/'))
+            ->line("Keep shopping and earning points to enjoy more discounts on future purchases!")
+            ->line("Thank you for being a part of {$storeName}!")
             ->line("")
             ->line("Warm regards,")
             ->line("The {$storeName} Team")
@@ -67,7 +72,9 @@ class WelcomeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'points_used' => $this->pointsUsed,
+            'discount' => $this->discount,
+            'remaining_points' => $this->remainingPoints,
         ];
     }
 }

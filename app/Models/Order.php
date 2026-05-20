@@ -47,16 +47,11 @@ class Order extends Model
     public function sendConfirmationEmail()
     {
         try {
-            // Since there is no Mailable defined yet, we'll just log it or send a raw mail if configured
-            // For now, let's just log to prevent the 500 error if mail fails
-            \Log::info("Order confirmation email would be sent for Order #" . $this->id);
-            
-            // If you want to actually try sending a raw email:
-            // \Illuminate\Support\Facades\Mail::raw("Your order #{$this->id} has been placed successfully.", function($message) {
-            //     $message->to($this->user->email)->subject("Order Confirmation");
-            // });
+            if ($this->user) {
+                $this->user->notify(new \App\Notifications\OrderCreatedNotification($this));
+            }
         } catch (\Exception $e) {
-            \Log::error("Failed to send order confirmation email: " . $e->getMessage());
+            \Log::error("Failed to send order confirmation email for Order #{$this->id}: " . $e->getMessage());
         }
     }
 }

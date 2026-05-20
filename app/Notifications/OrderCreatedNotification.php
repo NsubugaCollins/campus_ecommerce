@@ -2,20 +2,23 @@
 
 namespace App\Notifications;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeNotification extends Notification
+class OrderCreatedNotification extends Notification
 {
     use Queueable;
+
+    public Order $order;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -39,17 +42,16 @@ class WelcomeNotification extends Notification
         $storeAddress = \App\Models\Setting::get('store_address', 'Main Campus Plaza, Block A');
 
         return (new MailMessage)
-            ->subject("Welcome to {$storeName}!")
+            ->subject("Order Confirmation - Order #{$this->order->id} - {$storeName}")
             ->greeting("Hello {$notifiable->name},")
-            ->line("Welcome to {$storeName} – your campus sharing economy platform! We are thrilled to have you join our community.")
-            ->line("With {$storeName}, you can buy and sell items directly within the campus community, negotiate trade-ins, and earn rewards.")
-            ->line("Here is a quick overview of what you can do:")
-            ->line("• Browse and shop premium deals directly on the platform.")
-            ->line("• Sell your own products or negotiate trade-ins.")
-            ->line("• Refer friends using your unique referral code ({$notifiable->referral_code}) to earn reward points!")
-            ->action('Start Shopping Now', url('/'))
-            ->line("If you have any questions, feel free to contact us.")
-            ->line("Thank you for being part of {$storeName}!")
+            ->line("Thank you for your order! Your order #{$this->order->id} has been placed successfully.")
+            ->line("Here are your order details:")
+            ->line("• Total Amount: UGX " . number_format($this->order->total_amount, 2))
+            ->line("• Shipping Address: {$this->order->shipping_address}")
+            ->line("• Payment Method: " . strtoupper($this->order->payment_method))
+            ->action('View Your Orders', url('/orders'))
+            ->line("We are processing your order and will contact you shortly for delivery.")
+            ->line("Thank you for shopping at {$storeName}!")
             ->line("")
             ->line("Warm regards,")
             ->line("The {$storeName} Team")
@@ -67,7 +69,8 @@ class WelcomeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'order_id' => $this->order->id,
+            'total_amount' => $this->order->total_amount,
         ];
     }
 }

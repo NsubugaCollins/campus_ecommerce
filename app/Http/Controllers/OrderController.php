@@ -125,6 +125,15 @@ class OrderController extends Controller
         // Send order confirmation email
         $order->sendConfirmationEmail();
 
+        // Send points used notification if applicable
+        if ($pointsToUse > 0 && $user) {
+            try {
+                $user->notify(new \App\Notifications\PointsUsedNotification((int) $pointsToUse, (float) $discount, $user->points));
+            } catch (\Exception $e) {
+                \Log::error("Failed to send points used notification: " . $e->getMessage());
+            }
+        }
+
         // Clear the cart
         CartItem::where($identifier)->delete();
 

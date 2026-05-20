@@ -2,20 +2,23 @@
 
 namespace App\Notifications;
 
+use App\Models\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeNotification extends Notification
+class NewProductNotification extends Notification
 {
     use Queueable;
+
+    public Product $product;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Product $product)
     {
-        //
+        $this->product = $product;
     }
 
     /**
@@ -38,18 +41,23 @@ class WelcomeNotification extends Notification
         $storePhone = \App\Models\Setting::get('store_phone', '+256 700 000000');
         $storeAddress = \App\Models\Setting::get('store_address', 'Main Campus Plaza, Block A');
 
-        return (new MailMessage)
-            ->subject("Welcome to {$storeName}!")
+        $mailMessage = (new MailMessage)
+            ->subject("New Product Alert: {$this->product->name} - {$storeName}")
             ->greeting("Hello {$notifiable->name},")
-            ->line("Welcome to {$storeName} – your campus sharing economy platform! We are thrilled to have you join our community.")
-            ->line("With {$storeName}, you can buy and sell items directly within the campus community, negotiate trade-ins, and earn rewards.")
-            ->line("Here is a quick overview of what you can do:")
-            ->line("• Browse and shop premium deals directly on the platform.")
-            ->line("• Sell your own products or negotiate trade-ins.")
-            ->line("• Refer friends using your unique referral code ({$notifiable->referral_code}) to earn reward points!")
-            ->action('Start Shopping Now', url('/'))
-            ->line("If you have any questions, feel free to contact us.")
-            ->line("Thank you for being part of {$storeName}!")
+            ->line("We are excited to let you know that a new product has just been listed on {$storeName}!")
+            ->line("Here are the details:")
+            ->line("• Name: {$this->product->name}")
+            ->line("• Category: {$this->product->category}")
+            ->line("• Price: UGX " . number_format($this->product->price, 2));
+
+        if (!empty($this->product->description)) {
+            $mailMessage->line("• Description: {$this->product->description}");
+        }
+
+        return $mailMessage
+            ->action('Shop Now', url('/'))
+            ->line("Be the first to grab this deal before it runs out!")
+            ->line("Thank you for being a valued member of {$storeName}!")
             ->line("")
             ->line("Warm regards,")
             ->line("The {$storeName} Team")
@@ -67,7 +75,8 @@ class WelcomeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'product_id' => $this->product->id,
+            'product_name' => $this->product->name,
         ];
     }
 }
