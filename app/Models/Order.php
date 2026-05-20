@@ -20,15 +20,6 @@ class Order extends Model
     ];
 
 
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    protected $dispatchesEvents = [
-        'created' => \App\Events\OrderCreated::class,
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,14 +35,4 @@ class Order extends Model
         return $this->hasOne(Rating::class);
     }
 
-    public function sendConfirmationEmail()
-    {
-        try {
-            if ($this->user) {
-                $this->user->notify(new \App\Notifications\OrderCreatedNotification($this));
-            }
-        } catch (\Exception $e) {
-            \Log::error("Failed to send order confirmation email for Order #{$this->id}: " . $e->getMessage());
-        }
-    }
 }

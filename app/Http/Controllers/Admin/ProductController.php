@@ -76,14 +76,6 @@ class ProductController extends Controller
                 }
             }
 
-            try {
-                $users = \App\Models\User::where('role', '!=', 'admin')->get();
-                if ($users->isNotEmpty()) {
-                    \Illuminate\Support\Facades\Notification::send($users, new \App\Notifications\NewProductNotification($product));
-                }
-            } catch (\Exception $e) {
-                \Log::error("Failed to broadcast new product notification: " . $e->getMessage());
-            }
 
             return redirect()->route('admin.products.index')
                 ->with('success', 'Product "' . $product->name . '" created successfully.');

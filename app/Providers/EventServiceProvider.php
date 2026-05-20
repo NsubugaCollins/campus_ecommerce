@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Events\UserCreated;
-use App\Events\OrderCreated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,14 +11,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    protected $listen = [
-        UserCreated::class => [
-            \App\Listeners\SendWelcomeEmail::class,
-        ],
-        OrderCreated::class => [
-            //
-        ],
-    ];
+    protected $listen = [];
 
     /**
      * Register any events for your application.

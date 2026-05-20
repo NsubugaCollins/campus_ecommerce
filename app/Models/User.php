@@ -42,14 +42,6 @@ class User extends Authenticatable
         });
     }
 
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    protected $dispatchesEvents = [
-        'created' => \App\Events\UserCreated::class,
-    ];
 
     /**
      * Get the attributes that should be cast.

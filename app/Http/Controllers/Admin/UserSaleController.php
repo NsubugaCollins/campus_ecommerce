@@ -36,13 +36,6 @@ class UserSaleController extends Controller
             'status' => 'offer_made',
         ]);
 
-        try {
-            if ($userSale->user) {
-                $userSale->user->notify(new \App\Notifications\OfferMadeNotification($userSale));
-            }
-        } catch (\Exception $e) {
-            \Log::error("Failed to send offer notification to user: " . $e->getMessage());
-        }
 
         return back()->with('success', 'Offer has been sent to the user.');
     }
