@@ -43,7 +43,7 @@ class OfferMadeNotification extends Notification
 
         $mailMessage = (new MailMessage)
             ->subject("New Trade-in Offer Received - {$this->userSale->product_name} - {$storeName}")
-            ->greeting("Hello {$notifiable->name},")
+            ->greeting("Hello, {$notifiable->name}")
             ->line("Good news! We have reviewed your trade-in / sale request for '{$this->userSale->product_name}'.")
             ->line("We are pleased to make you the following offer:")
             ->line("• Product: {$this->userSale->product_name}")

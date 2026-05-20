@@ -43,7 +43,7 @@ class NewProductNotification extends Notification
 
         $mailMessage = (new MailMessage)
             ->subject("New Product Alert: {$this->product->name} - {$storeName}")
-            ->greeting("Hello {$notifiable->name},")
+            ->greeting("Hello, {$notifiable->name}")
             ->line("We are excited to let you know that a new product has just been listed on {$storeName}!")
             ->line("Here are the details:")
             ->line("• Name: {$this->product->name}")

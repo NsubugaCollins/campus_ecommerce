@@ -43,7 +43,7 @@ class OrderCreatedNotification extends Notification
 
         return (new MailMessage)
             ->subject("Order Confirmation - Order #{$this->order->id} - {$storeName}")
-            ->greeting("Hello {$notifiable->name},")
+            ->greeting("Hello, {$notifiable->name}")
             ->line("Thank you for your order! Your order #{$this->order->id} has been placed successfully.")
             ->line("Here are your order details:")
             ->line("• Total Amount: UGX " . number_format($this->order->total_amount, 2))

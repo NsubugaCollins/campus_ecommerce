@@ -46,7 +46,7 @@ class PointsUsedNotification extends Notification
 
         return (new MailMessage)
             ->subject("Reward Points Redeemed - {$storeName}")
-            ->greeting("Hello {$notifiable->name},")
+            ->greeting("Hello, {$notifiable->name}")
             ->line("You have successfully redeemed reward points for a discount on your purchase!")
             ->line("Here is your point transaction summary:")
             ->line("• Points Redeemed: {$this->pointsUsed} points")

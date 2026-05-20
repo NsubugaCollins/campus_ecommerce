@@ -40,7 +40,7 @@ class WelcomeNotification extends Notification
 
         return (new MailMessage)
             ->subject("Welcome to {$storeName}!")
-            ->greeting("Hello {$notifiable->name},")
+            ->greeting("Hello, {$notifiable->name}")
             ->line("Welcome to {$storeName} – your campus sharing economy platform! We are thrilled to have you join our community.")
             ->line("With {$storeName}, you can buy and sell items directly within the campus community, negotiate trade-ins, and earn rewards.")
             ->line("Here is a quick overview of what you can do:")
