@@ -81,6 +81,37 @@
                             <p class="text-muted small">Don't have an account? <a href="{{ route('register') }}" class="text-decoration-none fw-bold" style="color: #DC143C;">Sign up</a></p>
                         </div>
                     </form>
+
+                    {{-- Welcoming statements --}}
+                    <div class="welcome-section mt-4 pt-3" style="border-top: 1px solid rgba(128,128,128,0.15);">
+                        <p class="text-center text-muted small fw-semibold mb-3" style="letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.7rem;">Why join Campus Mall?</p>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="welcome-item d-flex align-items-start gap-2">
+                                <span class="welcome-icon" style="color: #B87333; font-size: 1rem; margin-top: 1px;">🛍️</span>
+                                <div>
+                                    <span class="small fw-semibold d-block" style="color: inherit;">Campus-exclusive deals</span>
+                                    <span class="text-muted" style="font-size: 0.78rem;">Discover products curated just for campus life — from textbooks to tech.</span>
+                                </div>
+                            </div>
+                            <div class="welcome-item d-flex align-items-start gap-2">
+                                <span class="welcome-icon" style="color: #DC143C; font-size: 1rem; margin-top: 1px;">⚡</span>
+                                <div>
+                                    <span class="small fw-semibold d-block" style="color: inherit;">Fast & reliable delivery</span>
+                                    <span class="text-muted" style="font-size: 0.78rem;">Get your orders delivered right to your hostel or lecture hall.</span>
+                                </div>
+                            </div>
+                            <div class="welcome-item d-flex align-items-start gap-2">
+                                <span class="welcome-icon" style="color: #28a745; font-size: 1rem; margin-top: 1px;">🎁</span>
+                                <div>
+                                    <span class="small fw-semibold d-block" style="color: inherit;">Earn loyalty points</span>
+                                    <span class="text-muted" style="font-size: 0.78rem;">Shop and earn points you can redeem for discounts on future orders.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center mt-3 mb-0" style="font-size: 0.8rem; color: #B87333; font-style: italic;">
+                            "Your campus, your marketplace — made simple." 🏫
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
