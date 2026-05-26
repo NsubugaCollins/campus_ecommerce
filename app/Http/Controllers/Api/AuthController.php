@@ -26,13 +26,9 @@ class AuthController extends Controller
             ]);
         }
 
-        if ($user->role === 'admin') {
-            return response()->json([
-                'message' => 'Please use the admin web panel. This app is for shoppers only.',
-            ], 403);
+        if ($user->role !== 'admin') {
+            $this->applyLoginRewards($user);
         }
-
-        $this->applyLoginRewards($user);
 
         $token = $user->createToken('mobile-app')->plainTextToken;
 
@@ -116,6 +112,7 @@ class AuthController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'phone' => $user->phone,
+            'role' => $user->role ?? 'user',
             'points' => (int) $user->points,
             'referral_code' => $user->referral_code,
             'login_count' => (int) $user->login_count,

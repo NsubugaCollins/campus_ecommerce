@@ -84,7 +84,7 @@
 
                     {{-- Welcoming statements --}}
                     <div class="welcome-section mt-4 pt-3" style="border-top: 1px solid rgba(128,128,128,0.15);">
-                        <p class="text-center text-muted small fw-semibold mb-3" style="letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.7rem;">Why join Campus Mall?</p>
+                        <p class="text-center text-muted small fw-semibold mb-3" style="letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.7rem;">Why join Cycle?</p>
                         <div class="d-flex flex-column gap-2">
                             <div class="welcome-item d-flex align-items-start gap-2">
                                 <span class="welcome-icon" style="color: #B87333; font-size: 1rem; margin-top: 1px;">🛍️</span>

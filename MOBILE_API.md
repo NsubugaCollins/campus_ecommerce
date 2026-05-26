@@ -37,6 +37,20 @@ Header for protected routes: `Authorization: Bearer {token}`
 - Orders: `GET /api/orders`, `POST /api/orders`, `GET /api/orders/{order}`
 - Profile: `GET/PUT /api/profile`, `PUT /api/profile/password`
 
+### User-only (requires `user` role)
+
+- Messages: `GET/POST /api/messages`, react/delete as documented in `routes/api.php`
+- Trade-in: `GET/POST /api/trade-in`, accept/reject offers
+- Ratings: `POST /api/ratings`
+- PayPal: `POST /api/orders/{order}/paypal` → `{ approval_url }`
+
+### Admin-only (`/api/admin/*`, requires `admin` role)
+
+- Dashboard, analytics, earnings
+- Products CRUD, orders, users, settings
+- Message threads with customers
+- Trade-in management (offers & status)
+
 Checkout body for `POST /api/orders`:
 
 ```json
