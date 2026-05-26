@@ -148,41 +148,52 @@
         padding: 2rem;
     }
 
-    /* Animation cycles */
+    /* Animation cycles — 4 slides, 16s total, 25% each */
     .slide-1 {
-        animation: slideShow1 12s infinite ease-in-out;
+        animation: slideShow1 16s infinite ease-in-out;
     }
     .slide-2 {
-        animation: slideShow2 12s infinite ease-in-out;
+        animation: slideShow2 16s infinite ease-in-out;
     }
     .slide-3 {
-        animation: slideShow3 12s infinite ease-in-out;
+        animation: slideShow3 16s infinite ease-in-out;
+    }
+    .slide-4 {
+        animation: slideShow4 16s infinite ease-in-out;
     }
 
     @keyframes slideShow1 {
-        0% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
-        5% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        28% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        33% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        0%   { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        5%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        21%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        25%  { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
         100% { opacity: 0; }
     }
 
     @keyframes slideShow2 {
-        0% { opacity: 0; }
-        33% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
-        38% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        61% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        66% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        0%   { opacity: 0; }
+        25%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        30%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        46%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        50%  { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
         100% { opacity: 0; }
     }
 
     @keyframes slideShow3 {
-        0% { opacity: 0; }
-        66% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
-        71% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        94% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        99% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        0%   { opacity: 0; }
+        50%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        55%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        71%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        75%  { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
         100% { opacity: 0; }
+    }
+
+    @keyframes slideShow4 {
+        0%   { opacity: 0; }
+        75%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        80%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        96%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        100% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
     }
 
     .subtitle-line {
@@ -281,6 +292,11 @@
                         <span class="subtitle-line">Smart Shopping</span>
                         <span class="main-line">Save Time</span>
                         <span class="accent-line">& Save Cash</span>
+                    </div>
+                    <div class="text-slide slide-4">
+                        <span class="subtitle-line">Your Stuff Has Value</span>
+                        <span class="main-line">Turn Clutter</span>
+                        <span class="accent-line">Into Cash</span>
                     </div>
                 </div>
             </div>

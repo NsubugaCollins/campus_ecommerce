@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -92,5 +95,19 @@ class RegisterController extends Controller
         return $user;
     }
 
+    /**
+     * The user has been registered — send welcome email.
+     */
+    protected function registered(Request $request, $user)
+    {
+        try {
+            Mail::to($user->email)->send(new WelcomeMail($user));
+        } catch (\Exception $e) {
+            // Log but don't block registration if mail fails
+            \Log::error('Welcome email failed: ' . $e->getMessage());
+        }
+
+        return redirect($this->redirectPath());
+    }
 
 }

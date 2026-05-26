@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
+use App\Mail\OrderConfirmedMail;
+use App\Mail\PointsUsedMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
@@ -122,9 +125,30 @@ class OrderController extends Controller
             ]);
         }
 
-
         // Clear the cart
         CartItem::where($identifier)->delete();
+
+        // Send order confirmation email
+        try {
+            $order->load(['user', 'items.product']);
+            Mail::to($order->user->email)->send(new OrderConfirmedMail($order));
+        } catch (\Exception $e) {
+            \Log::error('Order confirmation email failed: ' . $e->getMessage());
+        }
+
+        // Send points-used email if points were redeemed
+        if ($pointsToUse > 0 && $user) {
+            try {
+                Mail::to($user->email)->send(new PointsUsedMail(
+                    $user,
+                    $pointsToUse,
+                    $discount,
+                    $user->fresh()->points
+                ));
+            } catch (\Exception $e) {
+                \Log::error('Points used email failed: ' . $e->getMessage());
+            }
+        }
 
         if ($request->payment_method === 'paypal') {
             return redirect()->route('paypal.payment', $order->id);

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderDeliveredMail;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -27,6 +29,16 @@ class OrderController extends Controller
         ]);
 
         $order->update(['status' => $request->status]);
+
+        // Notify buyer when order is marked as delivered/completed
+        if ($request->status === 'completed') {
+            try {
+                $order->load(['user', 'items.product']);
+                Mail::to($order->user->email)->send(new OrderDeliveredMail($order));
+            } catch (\Exception $e) {
+                \Log::error('Order delivered email failed: ' . $e->getMessage());
+            }
+        }
 
         return back()->with('success', 'Order status updated successfully!');
     }
