@@ -34,7 +34,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Create storage link and optimize
 RUN php artisan storage:link --force \
-    && php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
 
@@ -42,4 +41,4 @@ RUN php artisan storage:link --force \
 EXPOSE 10000
 
 # Start the server and run migrations
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
+CMD php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000

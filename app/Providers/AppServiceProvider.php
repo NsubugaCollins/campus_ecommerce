@@ -26,10 +26,14 @@ class AppServiceProvider extends ServiceProvider
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
 
-        // Share settings with all views
+        // Share settings with all views safely
         view()->composer('*', function ($view) {
-            $settings = \App\Models\Setting::all()->pluck('value', 'key');
-            $view->with('siteSettings', $settings);
+            try {
+                $settings = \App\Models\Setting::all()->pluck('value', 'key');
+                $view->with('siteSettings', $settings);
+            } catch (\Exception $e) {
+                $view->with('siteSettings', collect());
+            }
         });
     }
 }
