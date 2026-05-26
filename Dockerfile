@@ -32,13 +32,11 @@ COPY . .
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Create storage link and optimize
-RUN php artisan storage:link --force \
-    && php artisan route:cache \
-    && php artisan view:cache
+# Create storage link
+RUN php artisan storage:link --force
 
 # Expose the port
 EXPOSE 10000
 
 # Start the server and run migrations
-CMD php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
+CMD php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
