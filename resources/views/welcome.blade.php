@@ -34,27 +34,208 @@
             </div>
         </div>
 
-        <!-- Center: Main Carousel -->
+<style>
+    .hero-carousel-text {
+        position: relative;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        height: 450px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .carousel-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(18, 0, 5, 0.75), rgba(11, 26, 48, 0.75));
+        z-index: 1;
+    }
+
+    [data-bs-theme="light"] .carousel-overlay {
+        background: linear-gradient(135deg, rgba(255, 240, 245, 0.75), rgba(240, 243, 255, 0.75));
+    }
+
+    .text-hero-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-items: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .text-slide {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    /* Animation cycles */
+    .slide-1 {
+        animation: slideShow1 12s infinite ease-in-out;
+    }
+    .slide-2 {
+        animation: slideShow2 12s infinite ease-in-out;
+    }
+    .slide-3 {
+        animation: slideShow3 12s infinite ease-in-out;
+    }
+
+    @keyframes slideShow1 {
+        0% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        5% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        28% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        33% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        100% { opacity: 0; }
+    }
+
+    @keyframes slideShow2 {
+        0% { opacity: 0; }
+        33% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        38% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        61% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        66% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        100% { opacity: 0; }
+    }
+
+    @keyframes slideShow3 {
+        0% { opacity: 0; }
+        66% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+        71% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        94% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        99% { opacity: 0; transform: scale(1.08) translateY(-20px); filter: blur(8px); }
+        100% { opacity: 0; }
+    }
+
+    .subtitle-line {
+        display: block;
+        text-transform: uppercase;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 5px;
+        color: #B87333;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    [data-bs-theme="light"] .subtitle-line {
+        color: #A05E24;
+        text-shadow: none;
+    }
+
+    .main-line {
+        display: block;
+        text-transform: uppercase;
+        font-family: 'Outfit', sans-serif;
+        font-size: 3.8rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #ffffff;
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+
+    [data-bs-theme="light"] .main-line {
+        color: #121212;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .accent-line {
+        display: block;
+        text-transform: uppercase;
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: #DC143C;
+        line-height: 1.1;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+
+    [data-bs-theme="light"] .accent-line {
+        text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 991.98px) {
+        .hero-carousel-text { height: 350px; }
+        .subtitle-line { font-size: 0.9rem; letter-spacing: 3px; }
+        .main-line { font-size: 2.8rem; }
+        .accent-line { font-size: 2rem; }
+    }
+
+    @media (max-width: 767.98px) {
+        .hero-carousel-text { height: 250px; }
+        .subtitle-line { font-size: 0.8rem; letter-spacing: 2px; }
+        .main-line { font-size: 2rem; }
+        .accent-line { font-size: 1.5rem; }
+        .text-slide { padding: 1rem; }
+    }
+
+    @media (max-width: 575.98px) {
+        .main-line { font-size: 1.7rem; }
+        .accent-line { font-size: 1.3rem; }
+    }
+</style>
+
+        <!-- Center: Text Hero Slider with Background Carousel -->
         <div class="col-lg-7 col-md-8">
-            <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="3000">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-                </div>
-                <div class="carousel-inner h-100">
-                    <div class="carousel-item active h-100">
-                        <img src="{{ asset('images/scroll1.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
+            <div class="hero-carousel-text">
+                <!-- Background Image Carousel -->
+                <div id="heroImageCarousel" class="carousel slide carousel-fade h-100 w-100 position-absolute top-0 start-0" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <div class="carousel-overlay"></div>
+                            <img src="{{ asset('images/scroll1.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <div class="carousel-overlay"></div>
+                            <img src="{{ asset('images/scroll2.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
+                        </div>
                     </div>
-                    <div class="carousel-item h-100">
-                        <img src="{{ asset('images/scroll2.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="prev" style="z-index: 3; border: none; background: transparent;">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true" style="opacity: 0.6;"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="next" style="z-index: 3; border: none; background: transparent;">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true" style="opacity: 0.6;"></span>
+                    </button>
+                </div>
+
+                <!-- Text Overlay -->
+                <div class="text-hero-container">
+                    <div class="text-slide slide-1">
+                        <span class="subtitle-line">Discover</span>
+                        <span class="main-line">The Best</span>
+                        <span class="accent-line">Campus Deals</span>
+                    </div>
+                    <div class="text-slide slide-2">
+                        <span class="subtitle-line">Convenience</span>
+                        <span class="main-line">Delivered</span>
+                        <span class="accent-line">To Your Hostel</span>
+                    </div>
+                    <div class="text-slide slide-3">
+                        <span class="subtitle-line">Smart Shopping</span>
+                        <span class="main-line">Save Time</span>
+                        <span class="accent-line">& Save Cash</span>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                </button>
             </div>
         </div>
 
@@ -158,7 +339,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Countdown timer logic for Flash Sales
-        // Set an arbitrary end time 5 hours from now to simulate flash sale remaining time
         let endTime = new Date().getTime() + (5 * 60 * 60 * 1000) + (23 * 60 * 1000); 
 
         function updateTimer() {
@@ -166,7 +346,6 @@
             let distance = endTime - now;
 
             if (distance < 0) {
-                // reset for demonstration purposes if it drops below 0
                 endTime = new Date().getTime() + (5 * 60 * 60 * 1000);
                 distance = endTime - now;
             }
@@ -183,11 +362,11 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // Explicitly initialize and start the carousel auto-scrolling
-        const heroCarousel = document.querySelector('#heroCarousel');
-        if (heroCarousel) {
-            new bootstrap.Carousel(heroCarousel, {
-                interval: 3000,
+        // Explicitly initialize the background image carousel
+        const heroCarouselEl = document.querySelector('#heroImageCarousel');
+        if (heroCarouselEl) {
+            new bootstrap.Carousel(heroCarouselEl, {
+                interval: 4000,
                 ride: 'carousel',
                 wrap: true
             });
