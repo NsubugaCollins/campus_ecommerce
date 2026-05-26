@@ -42,20 +42,82 @@
         height: 450px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         border: 1px solid rgba(255, 255, 255, 0.05);
+        /* Dark Theme intuitive & attractive gradient background using RGB */
+        background: linear-gradient(135deg, rgb(28, 10, 36) 0%, rgb(64, 12, 38) 35%, rgb(14, 30, 69) 70%, rgb(48, 18, 12) 100%);
+        background-size: 400% 400%;
+        animation: heroGradient 15s ease infinite;
     }
 
-    .carousel-overlay {
+    @keyframes heroGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    [data-bs-theme="light"] .hero-carousel-text {
+        /* Light Theme intuitive & attractive gradient background using RGB */
+        background: linear-gradient(135deg, rgb(255, 240, 245) 0%, rgb(240, 243, 255) 40%, rgb(249, 240, 255) 75%, rgb(255, 245, 235) 100%);
+        background-size: 400% 400%;
+        animation: heroGradient 15s ease infinite;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    /* Floating Ambient Glow Orbs using RGB */
+    .glow-orb {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(18, 0, 5, 0.75), rgba(11, 26, 48, 0.75));
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.32;
         z-index: 1;
+        pointer-events: none;
+    }
+    
+    .orb-1 {
+        width: 280px;
+        height: 280px;
+        background: rgb(220, 20, 60); /* Crimson */
+        top: -60px;
+        left: -60px;
+        animation: floatOrb1 18s infinite alternate ease-in-out;
+    }
+    
+    .orb-2 {
+        width: 320px;
+        height: 320px;
+        background: rgb(184, 115, 51); /* Copper */
+        bottom: -90px;
+        right: -90px;
+        animation: floatOrb2 24s infinite alternate ease-in-out;
     }
 
-    [data-bs-theme="light"] .carousel-overlay {
-        background: linear-gradient(135deg, rgba(255, 240, 245, 0.75), rgba(240, 243, 255, 0.75));
+    .orb-3 {
+        width: 220px;
+        height: 220px;
+        background: rgb(0, 102, 204); /* Deep Blue */
+        top: 40%;
+        left: 30%;
+        animation: floatOrb3 20s infinite alternate ease-in-out;
+    }
+
+    [data-bs-theme="light"] .glow-orb {
+        opacity: 0.45;
+        filter: blur(90px);
+    }
+
+    @keyframes floatOrb1 {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(120px, 60px) scale(1.25); }
+    }
+    
+    @keyframes floatOrb2 {
+        0% { transform: translate(0, 0) scale(1.1); }
+        100% { transform: translate(-140px, -70px) scale(0.85); }
+    }
+
+    @keyframes floatOrb3 {
+        0% { transform: translate(0, 0) scale(0.9); }
+        100% { transform: translate(80px, -60px) scale(1.15); }
     }
 
     .text-hero-container {
@@ -195,28 +257,13 @@
     }
 </style>
 
-        <!-- Center: Text Hero Slider with Background Carousel -->
+        <!-- Center: Text Hero Slider with RGB Glow Effects -->
         <div class="col-lg-7 col-md-8">
             <div class="hero-carousel-text">
-                <!-- Background Image Carousel -->
-                <div id="heroImageCarousel" class="carousel slide carousel-fade h-100 w-100 position-absolute top-0 start-0" data-bs-ride="carousel">
-                    <div class="carousel-inner h-100">
-                        <div class="carousel-item active h-100">
-                            <div class="carousel-overlay"></div>
-                            <img src="{{ asset('images/scroll1.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Premium Electronics">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <div class="carousel-overlay"></div>
-                            <img src="{{ asset('images/scroll2.jpg') }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="Luxury Furniture">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="prev" style="z-index: 3; border: none; background: transparent;">
-                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true" style="opacity: 0.6;"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="next" style="z-index: 3; border: none; background: transparent;">
-                        <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true" style="opacity: 0.6;"></span>
-                    </button>
-                </div>
+                <!-- Glowing Ambient Blobs using RGB -->
+                <div class="glow-orb orb-1"></div>
+                <div class="glow-orb orb-2"></div>
+                <div class="glow-orb orb-3"></div>
 
                 <!-- Text Overlay -->
                 <div class="text-hero-container">
@@ -361,16 +408,6 @@
 
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        // Explicitly initialize the background image carousel
-        const heroCarouselEl = document.querySelector('#heroImageCarousel');
-        if (heroCarouselEl) {
-            new bootstrap.Carousel(heroCarouselEl, {
-                interval: 4000,
-                ride: 'carousel',
-                wrap: true
-            });
-        }
     });
 </script>
 @endsection
