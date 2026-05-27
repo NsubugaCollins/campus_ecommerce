@@ -71,7 +71,7 @@
         animation: heroGradient 15s ease infinite;
     }
 
-    @keyframes heroGradient {
+    @@keyframes heroGradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
@@ -128,17 +128,17 @@
         filter: blur(90px);
     }
 
-    @keyframes floatOrb1 {
+    @@keyframes floatOrb1 {
         0% { transform: translate(0, 0) scale(1); }
         100% { transform: translate(120px, 60px) scale(1.25); }
     }
     
-    @keyframes floatOrb2 {
+    @@keyframes floatOrb2 {
         0% { transform: translate(0, 0) scale(1.1); }
         100% { transform: translate(-140px, -70px) scale(0.85); }
     }
 
-    @keyframes floatOrb3 {
+    @@keyframes floatOrb3 {
         0% { transform: translate(0, 0) scale(0.9); }
         100% { transform: translate(80px, -60px) scale(1.15); }
     }
@@ -185,7 +185,7 @@
         animation: slideShow4 16s infinite ease-in-out;
     }
 
-    @keyframes slideShow1 {
+    @@keyframes slideShow1 {
         0%   { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
         5%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         21%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
@@ -193,7 +193,7 @@
         100% { opacity: 0; }
     }
 
-    @keyframes slideShow2 {
+    @@keyframes slideShow2 {
         0%   { opacity: 0; }
         25%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
         30%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
@@ -202,7 +202,7 @@
         100% { opacity: 0; }
     }
 
-    @keyframes slideShow3 {
+    @@keyframes slideShow3 {
         0%   { opacity: 0; }
         50%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
         55%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
@@ -211,7 +211,7 @@
         100% { opacity: 0; }
     }
 
-    @keyframes slideShow4 {
+    @@keyframes slideShow4 {
         0%   { opacity: 0; }
         75%  { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
         80%  { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
@@ -270,14 +270,14 @@
         text-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 991.98px) {
+    @@media (max-width: 991.98px) {
         .hero-carousel-text { height: 350px; }
         .subtitle-line { font-size: 0.9rem; letter-spacing: 3px; }
         .main-line { font-size: 2.8rem; }
         .accent-line { font-size: 2rem; }
     }
 
-    @media (max-width: 767.98px) {
+    @@media (max-width: 767.98px) {
         .hero-carousel-text { height: 250px; }
         .subtitle-line { font-size: 0.8rem; letter-spacing: 2px; }
         .main-line { font-size: 2rem; }
@@ -285,7 +285,7 @@
         .text-slide { padding: 1rem; }
     }
 
-    @media (max-width: 575.98px) {
+    @@media (max-width: 575.98px) {
         .main-line { font-size: 1.7rem; }
         .accent-line { font-size: 1.3rem; }
     }
