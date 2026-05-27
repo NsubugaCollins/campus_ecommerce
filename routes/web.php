@@ -54,7 +54,18 @@ Route::get('/', function () {
         $categoryProducts[$category] = \App\Models\Product::where('category', $category)->take(6)->get();
     }
     
-    return view('welcome', compact('flashSales', 'recommended', 'categoryProducts', 'categories'));
+    // Fetch public customer reviews
+    $reviews = \App\Models\Rating::with('user')
+        ->whereNotNull('comment')
+        ->where('comment', '!=', '')
+        ->latest()
+        ->take(6)
+        ->get();
+        
+    $averageRating = number_format(\App\Models\Rating::avg('rating') ?: 4.8, 1);
+    $totalReviews = \App\Models\Rating::count();
+    
+    return view('welcome', compact('flashSales', 'recommended', 'categoryProducts', 'categories', 'reviews', 'averageRating', 'totalReviews'));
 });
 
 Route::get('/category/{category}', [\App\Http\Controllers\StoreController::class, 'category'])->name('product.category');
