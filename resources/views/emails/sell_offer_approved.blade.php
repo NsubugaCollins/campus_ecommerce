@@ -43,5 +43,5 @@
 
 <div class="divider"></div>
 
-<a href="{{ route('user-sales.index') }}" class="btn">Review My Offer →</a>
+<a href="{{ route('user-sales.show', $userSale) }}" class="btn">Review My Offer →</a>
 @endsection
