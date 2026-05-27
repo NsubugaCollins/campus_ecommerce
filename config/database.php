@@ -86,20 +86,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => (function() {
-                $url = env('DATABASE_URL', env('DB_URL'));
-                if ($url && env('RENDER') && str_contains($url, '.oregon-postgres.render.com')) {
-                    return str_replace('.oregon-postgres.render.com', '', $url);
-                }
-                return $url;
-            })(),
-            'host' => (function() {
-                $host = env('DB_HOST', '127.0.0.1');
-                if (env('RENDER') && str_ends_with($host, '.oregon-postgres.render.com')) {
-                    return explode('.', $host)[0];
-                }
-                return $host;
-            })(),
+            'url' => env('DATABASE_URL') 
+                ? (env('RENDER') 
+                    ? str_replace('.oregon-postgres.render.com', '', env('DATABASE_URL')) 
+                    : env('DATABASE_URL')) 
+                : env('DB_URL'),
+            'host' => env('DB_HOST') 
+                ? (env('RENDER') && str_ends_with(env('DB_HOST', '127.0.0.1'), '.oregon-postgres.render.com') 
+                    ? explode('.', env('DB_HOST'))[0] 
+                    : env('DB_HOST', '127.0.0.1')) 
+                : '127.0.0.1',
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'laravel'),
             'username' => env('DB_USERNAME', 'root'),
