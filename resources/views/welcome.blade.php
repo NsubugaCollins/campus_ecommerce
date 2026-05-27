@@ -5,19 +5,19 @@
 <!-- Schema.org JSON-LD Structured Data for Google/Search Engine Ratings -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Store",
+  "@@context": "https://schema.org",
+  "@@type": "Store",
   "name": "Cycle",
   "url": "{{ url('/') }}",
   "priceRange": "UGX",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "streetAddress": "Makerere University",
     "addressLocality": "Kampala",
     "addressCountry": "UG"
   },
   "aggregateRating": {
-    "@type": "AggregateRating",
+    "@@type": "AggregateRating",
     "ratingValue": "{{ $averageRating }}",
     "bestRating": "5",
     "worstRating": "1",
