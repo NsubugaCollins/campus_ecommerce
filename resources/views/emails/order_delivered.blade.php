@@ -38,5 +38,5 @@
 
 <p>Did everything arrive in good condition? We'd love to hear from you. Leave a rating to help other shoppers on campus.</p>
 
-<a href="{{ config('app.url') }}/user/orders" class="btn">Rate Your Order →</a>
+<a href="{{ route('orders.index') }}" class="btn">Rate Your Order →</a>
 @endsection

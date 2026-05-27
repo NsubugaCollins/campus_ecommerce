@@ -42,5 +42,5 @@
 
 <p>We'll notify you once your order is on its way. You can track your order at any time from your dashboard.</p>
 
-<a href="{{ config('app.url') }}/user/orders" class="btn">View My Orders →</a>
+<a href="{{ route('orders.index') }}" class="btn">View My Orders →</a>
 @endsection

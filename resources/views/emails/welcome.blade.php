@@ -31,5 +31,5 @@
 <div class="divider"></div>
 
 <p style="margin-bottom: 6px;">Ready to explore the marketplace?</p>
-<a href="{{ config('app.url') }}" class="btn">Start Shopping on Cycle →</a>
+<a href="{{ url('/') }}" class="btn">Start Shopping on Cycle →</a>
 @endsection

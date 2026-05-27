@@ -39,5 +39,5 @@
 
 <p>Don't be discouraged! You're welcome to submit a different item or adjust the details and try again. We're always looking for quality campus items to list on Cycle.</p>
 
-<a href="{{ config('app.url') }}/sell" class="btn">Submit Another Item →</a>
+<a href="{{ route('user-sales.create') }}" class="btn">Submit Another Item →</a>
 @endsection

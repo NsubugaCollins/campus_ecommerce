@@ -43,5 +43,5 @@
 
 <div class="divider"></div>
 
-<a href="{{ config('app.url') }}/my-sales" class="btn">Review My Offer →</a>
+<a href="{{ route('user-sales.index') }}" class="btn">Review My Offer →</a>
 @endsection

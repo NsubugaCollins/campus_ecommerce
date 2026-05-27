@@ -28,5 +28,5 @@
 
 <p>You can also earn more by referring friends using your code: <span class="highlight">{{ $user->referral_code }}</span></p>
 
-<a href="{{ config('app.url') }}" class="btn">Continue Shopping →</a>
+<a href="{{ url('/') }}" class="btn">Continue Shopping →</a>
 @endsection
