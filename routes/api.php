@@ -19,7 +19,33 @@ use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\Admin\UserSaleController as AdminUserSaleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/health', fn () => response()->json(['status' => 'ok', 'service' => 'campus-mall-api']));
+Route::get('/health', function () {
+    try {
+        \DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'ok',
+            'database' => 'connected',
+            'timestamp' => now()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'database' => 'failed',
+            'error' => $e->getMessage(),
+            'timestamp' => now()
+        ], 500);
+    }
+});
+
+Route::get('/debug-logs-xyz', function () {
+    $logPath = storage_path('logs/laravel.log');
+    if (!file_exists($logPath)) {
+        return response('No log file found.', 200, ['Content-Type' => 'text/plain']);
+    }
+    $lines = file($logPath);
+    $lastLines = array_slice($lines, -200);
+    return response(implode('', $lastLines), 200, ['Content-Type' => 'text/plain']);
+});
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
