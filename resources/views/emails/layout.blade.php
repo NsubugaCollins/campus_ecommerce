@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Cycle' }}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: 'Outfit', Arial, sans-serif;
             background-color: #0f0f13;
             color: #e2e8f0;
             padding: 30px 16px;
@@ -23,7 +23,7 @@
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #6c3aff 0%, #a855f7 50%, #ec4899 100%);
+            background: linear-gradient(135deg, #DC143C 0%, #b01030 50%, #B87333 100%);
             border-radius: 16px 16px 0 0;
             padding: 32px 40px 28px;
             text-align: center;
@@ -38,14 +38,14 @@
         }
 
         .logo span {
-            opacity: 0.75;
-            font-weight: 300;
+            color: #B87333;
+            font-weight: 900;
         }
 
         /* Body card */
         .card {
             background: #1a1a2e;
-            border: 1px solid rgba(108, 58, 255, 0.2);
+            border: 1px solid rgba(220, 20, 60, 0.15);
             border-top: none;
             padding: 40px;
         }
@@ -65,14 +65,14 @@
         }
 
         .highlight {
-            color: #a78bfa;
+            color: #B87333;
             font-weight: 600;
         }
 
         /* Info table */
         .info-box {
-            background: rgba(108, 58, 255, 0.08);
-            border: 1px solid rgba(108, 58, 255, 0.25);
+            background: rgba(220, 20, 60, 0.04);
+            border: 1px solid rgba(220, 20, 60, 0.2);
             border-radius: 10px;
             padding: 20px 24px;
             margin: 24px 0;
@@ -123,7 +123,7 @@
             display: inline-block;
             margin-top: 8px;
             padding: 13px 30px;
-            background: linear-gradient(135deg, #6c3aff, #a855f7);
+            background: linear-gradient(135deg, #DC143C, #B87333);
             color: #ffffff !important;
             text-decoration: none;
             border-radius: 10px;
@@ -137,13 +137,13 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(236,72,153,0.2));
-            border: 1px solid rgba(168,85,247,0.4);
+            background: linear-gradient(135deg, rgba(220,20,60,0.1), rgba(184,115,51,0.1));
+            border: 1px solid rgba(220,20,60,0.3);
             border-radius: 50px;
             padding: 8px 18px;
             font-size: 16px;
             font-weight: 700;
-            color: #c084fc;
+            color: #B87333;
             margin: 16px 0;
         }
 
@@ -157,7 +157,7 @@
         /* Footer */
         .footer {
             background: #13131f;
-            border: 1px solid rgba(108,58,255,0.12);
+            border: 1px solid rgba(220,20,60,0.12);
             border-top: none;
             border-radius: 0 0 16px 16px;
             padding: 24px 40px;
@@ -170,7 +170,7 @@
             margin-bottom: 4px;
         }
 
-        .footer a { color: #7c3aed; text-decoration: none; }
+        .footer a { color: #DC143C; text-decoration: none; }
     </style>
 </head>
 <body>
