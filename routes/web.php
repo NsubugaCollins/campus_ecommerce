@@ -96,6 +96,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkoutView'])->name('checkout.index');
     Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout.process');
     Route::get('/user/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    Route::delete('/user/orders/{order}/cancel', [App\Http\Controllers\OrderController::class, 'cancel'])->name('orders.cancel');
     
     // PayPal Routes
     Route::get('/paypal/payment/{order}', [App\Http\Controllers\PayPalController::class, 'payment'])->name('paypal.payment');

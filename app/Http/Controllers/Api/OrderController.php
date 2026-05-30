@@ -109,6 +109,24 @@ class OrderController extends Controller
         return response()->json($response, 201);
     }
 
+    public function cancel(Request $request, Order $order)
+    {
+        if ($order->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        if ($order->status !== 'pending') {
+            return response()->json(['message' => 'Only pending orders can be cancelled.'], 422);
+        }
+
+        $order->update(['status' => 'cancelled']);
+
+        return response()->json([
+            'message' => 'Order cancelled successfully',
+            'order' => $this->formatOrder($order->fresh(['items.product', 'rating']))
+        ]);
+    }
+
     protected function formatOrder(Order $order): array
     {
         return [

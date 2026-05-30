@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Mail\OrderConfirmedMail;
+use App\Mail\OrderCancelledMail;
 use App\Mail\PointsUsedMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -155,5 +156,32 @@ class OrderController extends Controller
         }
 
         return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
+    }
+
+    public function cancel(Order $order)
+    {
+        // Ensure the order belongs to the authenticated user
+        if ($order->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Only pending orders can be cancelled
+        if ($order->status !== 'pending') {
+            return redirect()->route('orders.index')
+                ->with('error', 'Only pending orders can be cancelled.');
+        }
+
+        $order->update(['status' => 'cancelled']);
+
+        // Send cancellation email
+        try {
+            $order->load(['user', 'items.product']);
+            Mail::to($order->user->email)->send(new OrderCancelledMail($order));
+        } catch (\Exception $e) {
+            \Log::error('Order cancellation email failed: ' . $e->getMessage());
+        }
+
+        return redirect()->route('orders.index')
+            ->with('success', 'Order #' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . ' has been cancelled. A confirmation email has been sent.');
     }
 }

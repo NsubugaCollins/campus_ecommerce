@@ -75,6 +75,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/orders', [OrderController::class, 'store']);
         Route::get('/orders/{order}', [OrderController::class, 'show']);
         Route::post('/orders/{order}/paypal', [PayPalController::class, 'createPayment']);
+        Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel']);
 
         Route::get('/profile', [ProfileController::class, 'show']);
         Route::put('/profile', [ProfileController::class, 'update']);

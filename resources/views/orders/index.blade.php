@@ -13,6 +13,13 @@
         </div>
     @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             @forelse($orders as $order)
@@ -27,6 +34,8 @@
                                 <span class="badge bg-warning text-dark text-uppercase px-3 py-2">Pending</span>
                             @elseif($order->status == 'completed')
                                 <span class="badge bg-success text-white text-uppercase px-3 py-2">Completed</span>
+                            @elseif($order->status == 'cancelled')
+                                <span class="badge bg-danger text-white text-uppercase px-3 py-2">Cancelled</span>
                             @else
                                 <span class="badge bg-secondary text-white text-uppercase px-3 py-2">{{ $order->status }}</span>
                             @endif
@@ -70,6 +79,14 @@
                                 <span class="text-white-50 me-2">Total Amount:</span>
                                 <span class="fs-5 fw-bold text-danger">UGX {{ number_format($order->total_amount, 2) }}</span>
                             </div>
+                            @if($order->status == 'pending')
+                                <button class="btn btn-sm btn-cancel-order text-uppercase fw-bold px-3 py-2"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#cancelModal{{ $order->id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                    Cancel Order
+                                </button>
+                            @endif
                             @if(in_array($order->status, ['completed', 'pending']))
                                 @if(!$order->rating)
                                     <button class="btn btn-sm btn-outline-warning text-uppercase fw-bold px-3 py-2" data-bs-toggle="modal" data-bs-target="#ratingModal{{ $order->id }}">
@@ -87,8 +104,50 @@
                     </div>
                 </div>
 
+                {{-- Cancel Confirmation Modal (pending orders only) --}}
+                @if($order->status == 'pending')
+                <div class="modal fade" id="cancelModal{{ $order->id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content admin-card-custom border border-danger border-opacity-25">
+                            <div class="modal-header border-secondary">
+                                <h5 class="modal-title text-white d-flex align-items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                                    Cancel Order
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center py-4">
+                                <div class="mb-3">
+                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                         style="width:64px;height:64px;background:rgba(220,53,69,0.12);">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                    </div>
+                                </div>
+                                <p class="text-white mb-1 fw-semibold fs-6">Are you sure you want to cancel this order?</p>
+                                <p class="text-white-50 small mb-0">
+                                    Order <span class="text-warning fw-bold">#{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</span>
+                                    &mdash; UGX {{ number_format($order->total_amount, 2) }}
+                                </p>
+                                <p class="text-white-50 small mt-2">A cancellation confirmation will be sent to your email.</p>
+                            </div>
+                            <div class="modal-footer border-secondary justify-content-center gap-3">
+                                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Keep Order</button>
+                                <form action="{{ route('orders.cancel', $order->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger px-4 fw-bold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                        Yes, Cancel Order
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                {{-- Rating Modal --}}
                 @if(in_array($order->status, ['completed', 'pending']) && !$order->rating)
-                <!-- Rating Modal -->
                 <div class="modal fade" id="ratingModal{{ $order->id }}" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content admin-card-custom">
@@ -105,16 +164,16 @@
                                         <div class="rating-stars h3">
                                             <input type="radio" name="rating" value="5" id="star5-{{ $order->id }}" class="d-none" required>
                                             <label for="star5-{{ $order->id }}" class="text-secondary cursor-pointer star-label" data-value="5"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></label>
-                                            
+
                                             <input type="radio" name="rating" value="4" id="star4-{{ $order->id }}" class="d-none">
                                             <label for="star4-{{ $order->id }}" class="text-secondary cursor-pointer star-label" data-value="4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></label>
-                                            
+
                                             <input type="radio" name="rating" value="3" id="star3-{{ $order->id }}" class="d-none">
                                             <label for="star3-{{ $order->id }}" class="text-secondary cursor-pointer star-label" data-value="3"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></label>
-                                            
+
                                             <input type="radio" name="rating" value="2" id="star2-{{ $order->id }}" class="d-none">
                                             <label for="star2-{{ $order->id }}" class="text-secondary cursor-pointer star-label" data-value="2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></label>
-                                            
+
                                             <input type="radio" name="rating" value="1" id="star1-{{ $order->id }}" class="d-none">
                                             <label for="star1-{{ $order->id }}" class="text-secondary cursor-pointer star-label" data-value="1"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></label>
                                         </div>
@@ -180,6 +239,21 @@
     }
     .cursor-pointer {
         cursor: pointer;
+    }
+    .btn-cancel-order {
+        color: #dc3545;
+        border: 1px solid rgba(220, 53, 69, 0.5);
+        background: rgba(220, 53, 69, 0.08);
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+    }
+    .btn-cancel-order:hover {
+        background: rgba(220, 53, 69, 0.2);
+        border-color: #dc3545;
+        color: #ff6b6b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.25);
     }
 </style>
 @endsection
