@@ -12,13 +12,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        $flashSales = Product::inRandomOrder()->take(6)->get();
-        $recommended = Product::inRandomOrder()->take(12)->get();
-        $categories = Product::select('category')->distinct()->pluck('category');
+        $flashSales = Product::with('user')->inRandomOrder()->take(6)->get();
+        $recommended = Product::with('user')->inRandomOrder()->take(12)->get();
+        $categories = [
+            'Electronics', 'Furniture', 'Beddings', 'Fashion',
+            'Accessories', 'Beauty', 'Scholastic Materials', 'Sporting Goods',
+            'Grocery', 'Kitchenware',
+        ];
 
         $categoryProducts = [];
         foreach ($categories as $category) {
-            $items = Product::where('category', $category)->take(6)->get();
+            $items = Product::with('user')->where('category', $category)->take(6)->get();
             $categoryProducts[$category] = $items->map(fn ($p) => $this->formatProduct($p))->values();
         }
 

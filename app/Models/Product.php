@@ -8,14 +8,21 @@ class Product extends Model
 {
     protected $fillable = [
         'product_id',
+        'ad_type',
         'name',
         'description',
         'category',
         'image',
         'price',
+        'user_id',
     ];
 
     protected $appends = ['image_url'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function orderItems()
     {

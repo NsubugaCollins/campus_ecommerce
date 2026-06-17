@@ -16,6 +16,7 @@ trait FormatsProducts
         return [
             'id' => $product->id,
             'product_id' => $product->product_id,
+            'ad_type' => $product->ad_type ?? 'product',
             'name' => $product->name,
             'description' => $product->description,
             'category' => $product->category,
@@ -31,6 +32,12 @@ trait FormatsProducts
                     return ['id' => $img->id, 'url' => $url];
                 })->values()->all()
                 : [],
+            'seller' => $product->user ? [
+                'id' => $product->user->id,
+                'name' => $product->user->name,
+                'email' => $product->user->email,
+                'phone' => $product->user->phone,
+            ] : null,
         ];
     }
 }
