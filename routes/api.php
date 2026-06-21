@@ -93,11 +93,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/trade-in/{userSale}/accept', [UserSaleController::class, 'accept']);
         Route::post('/trade-in/{userSale}/reject', [UserSaleController::class, 'reject']);
         Route::delete('/trade-in/{userSale}', [UserSaleController::class, 'destroy']);
-
-        // Jiji P2P User Product listings
-        Route::get('/user/products', [ProductController::class, 'userProducts']);
-        Route::post('/user/products', [ProductController::class, 'store']);
-        Route::delete('/user/products/{product}', [ProductController::class, 'destroyUserProduct']);
     });
 
     Route::middleware('admin')->prefix('admin')->group(function () {
