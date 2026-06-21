@@ -21,6 +21,8 @@ class ProfileController extends Controller
                 'phone' => $user->phone,
                 'points' => (int) $user->points,
                 'referral_code' => $user->referral_code,
+                'subscription_type' => $user->subscription_type,
+                'subscription_expires_at' => $user->subscription_expires_at ? $user->subscription_expires_at->toIso8601String() : null,
             ],
             'stats' => [
                 'total_orders' => $user->orders()->count(),
@@ -43,7 +45,16 @@ class ProfileController extends Controller
 
         $user->update($request->only('name', 'email', 'phone'));
 
-        return response()->json(['message' => 'Profile updated', 'user' => $user->only(['id', 'name', 'email', 'phone', 'points', 'referral_code'])]);
+        return response()->json(['message' => 'Profile updated', 'user' => [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'points' => (int) $user->points,
+            'referral_code' => $user->referral_code,
+            'subscription_type' => $user->subscription_type,
+            'subscription_expires_at' => $user->subscription_expires_at ? $user->subscription_expires_at->toIso8601String() : null,
+        ]]);
     }
 
     public function updatePassword(Request $request)

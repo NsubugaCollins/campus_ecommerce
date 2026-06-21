@@ -116,6 +116,8 @@ class AuthController extends Controller
             'points' => (int) $user->points,
             'referral_code' => $user->referral_code,
             'login_count' => (int) $user->login_count,
+            'subscription_type' => $user->subscription_type,
+            'subscription_expires_at' => $user->subscription_expires_at ? $user->subscription_expires_at->toIso8601String() : null,
         ];
     }
 }

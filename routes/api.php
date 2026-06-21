@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\UserSaleController;
 use App\Http\Controllers\Api\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
@@ -93,6 +94,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/trade-in/{userSale}/accept', [UserSaleController::class, 'accept']);
         Route::post('/trade-in/{userSale}/reject', [UserSaleController::class, 'reject']);
         Route::delete('/trade-in/{userSale}', [UserSaleController::class, 'destroy']);
+
+        // Subscription routes
+        Route::get('/subscription/status', [SubscriptionController::class, 'getStatus']);
+        Route::post('/subscription/pay', [SubscriptionController::class, 'initiatePayment']);
+        Route::get('/subscription/payment-status/{reference}', [SubscriptionController::class, 'checkPaymentStatus']);
+        Route::post('/subscription/cancel/{reference}', [SubscriptionController::class, 'cancelPayment']);
     });
 
     Route::middleware('admin')->prefix('admin')->group(function () {

@@ -24,7 +24,9 @@ class User extends Authenticatable
         'last_login_at', 
         'points', 
         'referral_code', 
-        'referred_by'
+        'referred_by',
+        'subscription_type',
+        'subscription_expires_at'
     ];
 
     protected $hidden = [
@@ -54,6 +56,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'subscription_expires_at' => 'datetime',
         ];
     }
 
@@ -80,5 +83,21 @@ class User extends Authenticatable
     public function receivedMessages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function subscriptionPayments()
+    {
+        return $this->hasMany(SubscriptionPayment::class);
+    }
+
+    public function isSubscribed()
+    {
+        if ($this->subscription_type === 'none') {
+            return false;
+        }
+        if (!$this->subscription_expires_at) {
+            return false;
+        }
+        return now()->lt($this->subscription_expires_at);
     }
 }
