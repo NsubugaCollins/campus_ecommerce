@@ -157,10 +157,15 @@ class MtnMomoService
             return $this->cachedToken;
         }
 
+        // MTN sandbox returns HTTP 411 (Length Required) when there is no
+        // Content-Length header on the token request.  Sending an empty string
+        // body forces Laravel Http to emit "Content-Length: 0".
         $response = Http::withBasicAuth($this->apiUser, $this->apiKey)
             ->withHeaders([
                 'Ocp-Apim-Subscription-Key' => $this->subscriptionKey,
+                'Content-Length'            => '0',
             ])
+            ->withBody('', 'application/json')
             ->post("{$this->baseUrl}/collection/token/");
 
         if ($response->failed()) {
