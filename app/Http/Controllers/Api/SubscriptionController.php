@@ -4,11 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\SubscriptionPayment;
+use App\Services\MtnMomoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Log;
 
 class SubscriptionController extends Controller
 {
+    protected MtnMomoService $momoService;
+
+    public function __construct(MtnMomoService $momoService)
+    {
+        $this->momoService = $momoService;
+    }
+
     /**
      * Return the authenticated user's current subscription status.
      */
@@ -27,9 +37,7 @@ class SubscriptionController extends Controller
     /**
      * Initiate a USSD-push payment request.
      *
-     * In a real integration this would call the MTN / Airtel API to push a
-     * USSD prompt to the subscriber's handset.  Here we record the pending
-     * transaction and return the reference so the app can start polling.
+     * Calls the MTN MoMo collections service to trigger a USSD push.
      */
     public function initiatePayment(Request $request)
     {
@@ -42,7 +50,31 @@ class SubscriptionController extends Controller
         $amounts = ['daily' => 1000, 'weekly' => 5000, 'monthly' => 15000];
         $amount  = $amounts[$request->plan];
 
-        $reference = 'SUB-MM-' . strtoupper(Str::random(10));
+        $externalId = 'SUB-MM-' . strtoupper(Str::random(10));
+
+        try {
+            if ($request->provider === 'mtn') {
+                // Request-to-pay triggers a real MTN MoMo USSD push on the subscriber's phone
+                $reference = $this->momoService->requestToPay(
+                    $externalId,
+                    $request->phone_number,
+                    $amount,
+                    'Campus Mall ' . ucfirst($request->plan) . ' Subscription',
+                    'Campus Mall payment for ' . $request->plan . ' plan'
+                );
+            } else {
+                // Keep simulated reference for Airtel
+                $reference = 'SIM-' . (string) Str::uuid();
+            }
+        } catch (\Exception $e) {
+            Log::error('[Subscription] MoMo initiation error: ' . $e->getMessage(), [
+                'exception' => $e
+            ]);
+            return response()->json([
+                'status'  => 'failed',
+                'message' => 'Could not initiate payment with the network operator: ' . $e->getMessage(),
+            ], 502);
+        }
 
         SubscriptionPayment::create([
             'user_id'      => $request->user()->id,
@@ -67,14 +99,7 @@ class SubscriptionController extends Controller
     /**
      * Poll endpoint – called by the app every few seconds.
      *
-     * Simulation logic:
-     *   • For the first 8 seconds the payment stays "pending"  (USSD is on
-     *     the user's phone).
-     *   • After 8 seconds we auto-complete it (user "entered their PIN").
-     *   • If it has already been completed, just return the success payload.
-     *
-     * In production, replace the timer logic with a real status query to the
-     * MTN / Airtel API.
+     * Check transaction status on MTN MoMo network or simulate for Airtel.
      */
     public function checkPaymentStatus(Request $request, string $reference)
     {
@@ -94,7 +119,37 @@ class SubscriptionController extends Controller
             return response()->json(['status' => 'failed',  'message' => 'Payment was declined.'], 402);
         }
 
-        // Simulate: auto-complete once 8 seconds have elapsed since creation.
+        // MTN MoMo real network status polling
+        if ($payment->provider === 'mtn') {
+            try {
+                $momoTx = $this->momoService->getTransactionStatus($reference);
+                $momoStatus = strtoupper($momoTx['status'] ?? 'PENDING');
+
+                if ($momoStatus === 'SUCCESSFUL') {
+                    return $this->completePayment($payment, $request->user());
+                }
+
+                if ($momoStatus === 'FAILED') {
+                    $payment->update(['status' => 'failed']);
+                    return response()->json(['status' => 'failed', 'message' => 'Payment was declined by MTN.'], 402);
+                }
+
+                // Still PENDING
+                return response()->json([
+                    'status'  => 'pending',
+                    'message' => 'Waiting for PIN authorisation on your handset…',
+                ]);
+            } catch (\Exception $e) {
+                Log::error('[Subscription] MoMo status query error: ' . $e->getMessage());
+                // Fallback: stay pending to survive transient connection errors during polling
+                return response()->json([
+                    'status'  => 'pending',
+                    'message' => 'Waiting for PIN authorisation on your handset…',
+                ]);
+            }
+        }
+
+        // Airtel simulation logic (if not mtn)
         $elapsedSeconds = now()->diffInSeconds($payment->created_at);
 
         if ($elapsedSeconds < 8) {
@@ -104,11 +159,20 @@ class SubscriptionController extends Controller
             ]);
         }
 
-        // ── Auto-complete the payment (USSD PIN accepted on handset) ────────
+        // ── Auto-complete simulated payment ────────
+        return $this->completePayment($payment, $request->user());
+    }
+
+    /**
+     * Helper to transition subscription payment to complete.
+     */
+    protected function completePayment(SubscriptionPayment $payment, $user)
+    {
         $payment->update(['status' => 'completed']);
 
-        $user   = $request->user();
-        $expiry = $user->isSubscribed() ? $user->subscription_expires_at : now();
+        $expiry = ($user->isSubscribed() && $user->subscription_expires_at)
+            ? Carbon::parse($user->subscription_expires_at)
+            : now();
 
         match ($payment->plan) {
             'daily'   => $expiry = $expiry->addDay(),
@@ -161,3 +225,4 @@ class SubscriptionController extends Controller
         ];
     }
 }
+
