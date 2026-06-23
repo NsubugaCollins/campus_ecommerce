@@ -66,22 +66,48 @@ class MtnMomoService
         $referenceId = (string) Str::uuid();
         $msisdn      = $this->normalizeMsisdn($phone);
 
+        // MTN sandbox only accepts official test MSISDNs and EUR currency.
+        // In production both values come from the real user input / config.
+        $isSandbox = ($this->environment === 'sandbox');
+        if ($isSandbox) {
+            // Map the last digit of the user's phone to a corresponding MTN sandbox test number:
+            // - Ends in 0 -> 46733123450 (Failed)
+            // - Ends in 1 -> 46733123451 (Rejected)
+            // - Ends in 2 -> 46733123452 (Timeout)
+            // - Ends in 3 -> 46733123453 (Success)
+            // - Ends in 4 -> 46733123454 (Pending -> Success after 30 seconds)
+            // - Any other -> 46733123453 (Success)
+            $lastDigit = substr($msisdn, -1);
+            if (in_array($lastDigit, ['0', '1', '2', '3', '4'])) {
+                $payloadMsisdn = '4673312345' . $lastDigit;
+            } else {
+                $payloadMsisdn = '46733123453'; // Default to success
+            }
+            $payloadCurrency = 'EUR';
+        } else {
+            $payloadMsisdn  = $msisdn;
+            $payloadCurrency = $this->currency;
+        }
+
         $payload = [
             'amount'     => (string) $amount,
-            'currency'   => $this->currency,
+            'currency'   => $payloadCurrency,
             'externalId' => $externalId,
             'payer'      => [
                 'partyIdType' => 'MSISDN',
-                'partyId'     => $msisdn,
+                'partyId'     => $payloadMsisdn,
             ],
             'payerMessage' => $payerMessage,
             'payeeNote'    => $payeeNote,
         ];
 
         Log::info('[MTN MoMo] Sending request-to-pay', [
-            'referenceId' => $referenceId,
-            'msisdn'      => $msisdn,
-            'amount'      => $amount,
+            'referenceId'  => $referenceId,
+            'msisdn'       => $msisdn,
+            'sandboxMsisdn'=> $payloadMsisdn,
+            'currency'     => $payloadCurrency,
+            'amount'       => $amount,
+            'sandbox'      => $isSandbox,
         ]);
 
         $response = $this->client($token)
