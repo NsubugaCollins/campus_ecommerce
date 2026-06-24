@@ -18,12 +18,12 @@ use RuntimeException;
  */
 class MtnMomoService
 {
-    private string $baseUrl;
-    private string $subscriptionKey;
-    private string $apiUser;
-    private string $apiKey;
-    private string $environment;
-    private string $currency;
+    private ?string $baseUrl;
+    private ?string $subscriptionKey;
+    private ?string $apiUser;
+    private ?string $apiKey;
+    private ?string $environment;
+    private ?string $currency;
 
     /** In-process token cache (lives for the request lifecycle). */
     private ?string $cachedToken = null;
@@ -178,6 +178,10 @@ class MtnMomoService
      */
     private function getAccessToken(): string
     {
+        if (empty($this->apiUser) || empty($this->apiKey) || empty($this->subscriptionKey)) {
+            throw new RuntimeException('MTN MoMo API credentials (subscription key, api user, or api key) are not configured on the server.');
+        }
+
         // Re-use if still valid (with a 60-second safety margin)
         if ($this->cachedToken && $this->tokenExpiresAt && time() < ($this->tokenExpiresAt - 60)) {
             return $this->cachedToken;
